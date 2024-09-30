@@ -16,10 +16,11 @@ enum stack_errors
 struct stack_info
 {
     size_t stack_born_line;
-    char*  stack_name;
+    const char* stack_born_file;
+    const char*  stack_name;
     size_t stack_last_usage_line;
-    char* stack_last_usage_function;
-    char* stack_last_usage_file;
+    const char* stack_last_usage_function;
+    const char* stack_last_usage_file;
 };
 
 struct stack

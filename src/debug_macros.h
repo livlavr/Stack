@@ -11,7 +11,7 @@
     #define $DEBUG(variable, type_of_output) do                                     \
     {                                                                               \
         printf("< " #type_of_output " > - %s | "                                    \
-               BLUE_TEXT   "file - %s"                                              \
+               BLUE_TEXT   "file - %s | "                                              \
                YELLOW_TEXT "line - %d | "                                           \
                GREEN_TEXT  "function - %s\n"                                        \
                DEFAULT_TEXT, variable, #variable, __FILE__, __LINE__, __FUNCTION__);\

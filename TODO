@@ -1,4 +1,5 @@
-[] define dump
+[x] define dump
+[] rename stack_dump
 [] dump в html
 [] проверка хватает ли места для push
 [] проверка размера стэка для pop

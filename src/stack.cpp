@@ -16,29 +16,6 @@ int stack_ctor(stack* stack, size_t capacity)
     return 0;
 }
 
-int stack_dump(stack* stack)
-{
-    printf("stack %s[%p] at %s:%d\n", stack->information->stack_name, stack,
-            stack->information->stack_last_usage_file, stack->information->stack_last_usage_line);
-    printf("initialized == %d\n", stack->initialized);
-    printf("capacity    == %lu\n", stack->capacity);
-    printf("size        == %lu\n", stack->size);
-    for(size_t index = 0; index < stack->capacity; index++)
-    {
-        if (index < stack->size)
-        {
-            printf("*[%lu] = %d\n", index, stack->data[index]);
-        }
-        else
-        {
-            printf("[%lu]\n", index);
-        }
-    }
-    printf("\n");
-
-    return 0;
-}
-
 int stack_push(stack* stack, int value)
 {
     if(stack->size == stack->capacity)

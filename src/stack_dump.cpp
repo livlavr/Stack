@@ -4,12 +4,14 @@
 
 int stack_dump(stack* stack)
 {
-    printf("stack %s[%p] at %s:%d\n", stack->information->stack_name,
+    printf("stack %s[%p] at %s:%lu born at %s:%lu\n", stack->information->stack_name,
             stack, stack->information->stack_last_usage_file,
-            stack->information->stack_last_usage_line);
-    printf("initialized == %d\n", stack->initialized);
-    printf("capacity    == %lu\n", stack->capacity);
-    printf("size        == %lu\n", stack->size);
+            stack->information->stack_last_usage_line,
+            stack->information->stack_born_file,
+            stack->information->stack_born_line);
+    printf("initialized = %d\n", stack->initialized);
+    printf("capacity    = %lu\n", stack->capacity);
+    printf("size        = %lu\n", stack->size);
     for(size_t index = 0; index < stack->capacity; index++)
     {
         if (index < stack->size)

@@ -11,9 +11,9 @@ int main()
 {
     stack st = {};
     int x = 0;
-    stack_dump(&st);
-    stack_ctor(&st, 10);
-    stack_dump(&st);
+    // stack_dump(&st);
+    $STACK_CTOR(st, 10);
+    // stack_dump(&st);
     stack_push(&st, 0);
     stack_push(&st, 1);
     stack_push(&st, 2);
@@ -22,6 +22,7 @@ int main()
     stack_push(&st, 5);
     stack_pop(&st, &x);
     stack_pop(&st, &x);
+    $DEBUG(x, %d);
     // printf("%d\n", x);
     // stack_pop(&st, &x);
     // printf("%d\n", x);
@@ -29,10 +30,10 @@ int main()
     stack_push(&st, 3);
     stack_push(&st, 4);
     stack_push(&st, 5);
-    stack_push(&st, 2);
-    stack_push(&st, 3);
-    stack_push(&st, 3);
-    stack_dump(&st);
+    // stack_push(&st, 2);
+    // stack_push(&st, 3);
+    // stack_push(&st, 3);
+    $STACK_DUMP(st);
     // stack_dtor(&st);
     return 0;
 }
