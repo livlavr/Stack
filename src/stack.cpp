@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "stack.h"
 #include "recalloc.h"
@@ -26,23 +27,26 @@ int stack_push(stack* stack, int value)
     stack->data[stack->size] = value;
     stack->size++;
 
-    // $STACK_DUMP(*stack);
+    struct stack stack_copy = *stack;
+    $STACK_DUMP(stack_copy);
 
     return 0;
 }
 
 int stack_pop(stack* stack, stack_elem* value)
 {
-    if (stack->size == 0)
+    if (stack->size * 4 <= stack->capacity)
     {
-        return STACK_UNDERFLOW;
+        stack->capacity = (size_t)ceil(stack->capacity / 2);
+        //TODO If push and pop recently inited stack capacity will become less then user asked. Is it ok?
     }
 
     *value = stack->data[stack->size - 1];
     stack->data[stack->size - 1] = 0;
     stack->size--;
 
-    // $STACK_DUMP(*stack);
+    struct stack stack_copy = *stack;
+    $STACK_DUMP(stack_copy);
 
     return 0;
 }
