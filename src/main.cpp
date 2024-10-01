@@ -21,6 +21,7 @@ int main() //TODO how to do MakeF see when .h is updated?
     // stack_push(&st, 1);
     // stack_push(&st, 1);
     // stack_push(&st, 1);
+    stack_dtor(&st);
 
     return 0;
 }

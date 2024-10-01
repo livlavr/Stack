@@ -88,7 +88,7 @@ int stack_dtor(stack* stack)
 
     stack->size     = 0;
     stack->capacity = 0;
-    free(stack->data);
+    free(&stack->data[-1]);
     stack->data = NULL;
 
     return 0;
@@ -192,6 +192,16 @@ int stack_ok(stack* stack, const char* function) //TODO valid test //TODO add in
     {
         stack->error += STACK_STRUCT_BAD_RIGHT_CANARY;
     }
+
+    // if(stack->data[-1] != STACK_CANARY && function != "stack_ctor")
+    // {
+    //     stack->error += STACK_BAD_LEFT_CANARY;
+    // }
+    // printf("%d", stack->data[stack->capacity - 2]);
+    // if(stack->data[stack->capacity - 1] != STACK_CANARY && function != "stack_ctor")
+    // {
+    //     stack->error += STACK_BAD_RIGHT_CANARY;
+    // }
 
     if(stack->error == 0)
     {
