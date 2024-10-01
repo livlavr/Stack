@@ -17,6 +17,7 @@ int main()
     stack_push(&st, 1);
     stack_pop(&st, &x);
     stack_push(&st, 1);
+    st.capacity = -10;
     stack_pop(&st, &x);
     stack_push(&st, 1);
     stack_push(&st, 1);

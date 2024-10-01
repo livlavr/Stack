@@ -47,7 +47,7 @@ int stack_dump(stack* stack)
         }
         else
         {
-            fprintf(dumb_file, "[%lu]\n", index);
+            fprintf(dumb_file, "[%lu] = %d [POISON]\n", index, stack->data[index]);
         }
     }
 
