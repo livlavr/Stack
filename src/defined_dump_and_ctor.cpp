@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "stack_dump.h"
+#include "defined_dump_and_ctor.h"
 
 int stack_dump(stack* stack)
 {

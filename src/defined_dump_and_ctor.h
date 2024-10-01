@@ -1,5 +1,5 @@
-#ifndef STACK_DUMP_H_
-#define STACK_DUMP_H_
+#ifndef DEFINED_DUMP_AND_CTOR_H_
+#define DEFINED_DUMP_AND_CTOR_H_
 
 #include <stdio.h>
 #include <stdlib.h>

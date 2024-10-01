@@ -5,7 +5,7 @@
 #include "stack.h"
 #include "recalloc.h"
 #include "debug_macros.h"
-#include "stack_dump.h"
+#include "defined_dump_and_ctor.h"
 
 int main()
 {
@@ -22,7 +22,6 @@ int main()
     stack_push(&st, 5);
     stack_pop(&st, &x);
     stack_pop(&st, &x);
-    $DEBUG(x, %d);
     // printf("%d\n", x);
     // stack_pop(&st, &x);
     // printf("%d\n", x);
