@@ -35,9 +35,9 @@ int stack_dump(stack* stack)
             stack->information->stack_born_file,
             stack->information->stack_born_line);
     fprintf(dumb_file, "initialized = %d\n", stack->initialized);
-    fprintf(dumb_file, "capacity    = %lu\n", stack->capacity);
-    fprintf(dumb_file, "size        = %lu\n", stack->size);
-    fprintf(dumb_file, "error       = %lu\n", stack->error);
+    fprintf(dumb_file, "capacity    = %d\n", stack->capacity);
+    fprintf(dumb_file, "size        = %d\n", stack->size);
+    fprintf(dumb_file, "error       = %d\n", stack->error);
 
     for(size_t index = 0; index < stack->capacity; index++)
     {

@@ -16,12 +16,16 @@ int stack_ctor(stack* stack, size_t capacity)
     stack->size        = 0;
     stack->capacity    = capacity;
     stack->data        = (stack_elem*)calloc(capacity, sizeof(stack_elem));
+
     for (size_t number_of_element = 0; number_of_element < stack->capacity; number_of_element++)
     {
         stack->data[number_of_element] = POISON;
     }
     stack->initialized = STACK_INITIALIZED;
     stack->error       = NO_ERRORS;
+
+    struct stack stack_copy = *stack;
+    $STACK_DUMP(stack_copy);
 
     check_expression(!stack_ok(stack, __func__), "STACK_CTOR" && !OK);
 
