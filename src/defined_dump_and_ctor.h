@@ -8,7 +8,13 @@
 #include "stack.h"
 #include "check_expression.h"
 
+enum DUMP_AND_CTOR_ERRORS
+{
+    DUMP_FILE_OPENING_ERROR = 100
+};
+
 int stack_dump(stack* stack);
+int stack_dump_file_cleaning();
 
 #ifndef NDEBUG
 

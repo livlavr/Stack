@@ -9,6 +9,8 @@
 
 int main()
 {
+    stack_dump_file_cleaning();
+
     stack st = {};
     int x = 0;
     // stack_dump(&st);

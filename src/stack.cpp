@@ -3,7 +3,7 @@
 
 #include "stack.h"
 #include "recalloc.h"
-#include "stack_dump.h"
+#include "defined_dump_and_ctor.h"
 
 int stack_ctor(stack* stack, size_t capacity)
 {
@@ -26,6 +26,8 @@ int stack_push(stack* stack, int value)
     stack->data[stack->size] = value;
     stack->size++;
 
+    // $STACK_DUMP(*stack);
+
     return 0;
 }
 
@@ -39,6 +41,8 @@ int stack_pop(stack* stack, stack_elem* value)
     *value = stack->data[stack->size - 1];
     stack->data[stack->size - 1] = 0;
     stack->size--;
+
+    // $STACK_DUMP(*stack);
 
     return 0;
 }

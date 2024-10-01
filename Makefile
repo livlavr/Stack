@@ -53,5 +53,5 @@ doxy :
 	doxygen
 
 clean :
-	@rm -f -r $(addprefix $(BUILD_DIR), *.o) $(TARGET) *.dSYM
+	@rm -f -r $(addprefix $(BUILD_DIR), *.o) $(TARGET) *.dSYM dump.txt
 	@printf  "$(YELLOW_TEXT)$(TARGET) CLEANED$(DEFAULT_TEXT)\n"
