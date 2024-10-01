@@ -6,16 +6,26 @@
 #include "recalloc.h"
 #include "defined_dump_and_ctor.h"
 
-static const stack_elem POISON = 109093;
-static const size_t OK = 1;
+static const stack_elem POISON = 109093; //DEBUG?
+static const size_t OK = 1; //DEBUG
+static const stack_elem STRUCT_STACK_CANARY = 808; //DEBUG
+static const stack_elem STACK_CANARY = 707; //DEBUG
 
 int stack_ctor(stack* stack, size_t capacity)
 {
     check_expression(!stack_ok(stack, __func__), "STACK_CTOR" && !OK);
 
+    stack->left_canary = STRUCT_STACK_CANARY; //DEBUG
+    stack->right_canary = STRUCT_STACK_CANARY; //DEBUG
+
     stack->size        = 0;
     stack->capacity    = capacity;
-    stack->data        = (stack_elem*)calloc(capacity, sizeof(stack_elem));
+    stack->data        = (stack_elem*)calloc(capacity + 2, sizeof(stack_elem)); //DEBUG +2
+
+    stack->data[0] = STACK_CANARY;//DEBUG
+    stack->data[stack->capacity + 1] = STACK_CANARY;//DEBUG
+
+    stack->data = stack->data + 1;//DEBUG
 
     for (size_t number_of_element = 0; number_of_element < stack->capacity; number_of_element++)
     {
@@ -112,8 +122,8 @@ int stack_resize(stack* stack, size_t new_size) //TODO DO_NOT_CALL_ME
 int stack_err_error(int ERROR)
 {
     size_t power_of_error = 1;
-    size_t number_of_insignificant_zeros = 6;
-    while(power_of_error <= 100000)
+    size_t number_of_insignificant_zeros = NUMBER_OF_ERRORS;
+    while(power_of_error <= 10 * (NUMBER_OF_ERRORS - 1))
     {
         if(ERROR < power_of_error)
         {
@@ -171,6 +181,16 @@ int stack_ok(stack* stack, const char* function) //TODO valid test //TODO add in
     if(stack->data == NULL && function != "stack_ctor")
     {
         stack->error += STACK_POINTER_IS_NULL;
+    }
+
+    if(stack->left_canary != STRUCT_STACK_CANARY && function != "stack_ctor")
+    {
+        stack->error += STACK_STRUCT_BAD_LEFT_CANARY;
+    }
+
+    if(stack->right_canary != STRUCT_STACK_CANARY && function != "stack_ctor")
+    {
+        stack->error += STACK_STRUCT_BAD_RIGHT_CANARY;
     }
 
     if(stack->error == 0)

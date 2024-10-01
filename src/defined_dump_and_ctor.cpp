@@ -39,6 +39,10 @@ int stack_dump(stack* stack)
     fprintf(dumb_file, "size        = %d\n", stack->size);
     fprintf(dumb_file, "error       = %d\n", stack->error);
 
+    fprintf(dumb_file, "CANARY      = %d\n", stack->left_canary); //DEBUG
+
+    fprintf(dumb_file, "canary      = %d\n", stack->data[-1]); //DEBUG
+
     for(size_t index = 0; index < stack->capacity; index++)
     {
         if (index < stack->size)
@@ -50,6 +54,11 @@ int stack_dump(stack* stack)
             fprintf(dumb_file, "[%lu] = %d [POISON]\n", index, stack->data[index]);
         }
     }
+
+    fprintf(dumb_file, "canary      = %d\n", stack->data[stack->capacity]); //DEBUG
+
+    fprintf(dumb_file, "CANARY      = %d\n", stack->right_canary); //DEBUG
+
 
     fprintf(dumb_file, "\n");
 
