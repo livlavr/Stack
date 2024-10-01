@@ -43,6 +43,16 @@ int stack_ok(stack* stack, const char* function);
 int stack_err_error(int ERROR);
 int stack_resize(stack* stack, size_t new_size);
 
-#define DESCR_(ERROR) printf("%s - %d", #ERROR, ERROR)
+#define DESCR_(ERROR) printf("%s - %d\n", #ERROR, ERROR)
+
+#define DESCRIPTION_OF_ERRORS \
+    DESCR_(STACK_DID_NOT_INITIALIZED);\
+    DESCR_(STACK_POINTER_IS_NULL);\
+    DESCR_(STACK_OVERFLOW);\
+    DESCR_(STACK_UNDERFLOW);\
+    DESCR_(STACK_BAD_CAPACITY);\
+    DESCR_(STACK_BAD_SIZE);\
+    printf("JERK, try to be little smarter\n");\
+    printf("\n")
 
 #endif

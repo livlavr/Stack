@@ -108,16 +108,19 @@ int stack_resize(stack* stack, size_t new_size) //TODO DO_NOT_CALL_ME
 int stack_err_error(int ERROR)
 {
     size_t power_of_error = 1;
-    size_t number_of_insignificant_zeros = 5;
+    size_t number_of_insignificant_zeros = 6;
     while(power_of_error <= 100000)
     {
         if(ERROR < power_of_error)
         {
+            printf("YOUR ERROR CODE: ");
             for(size_t number_of_printed_zeros = 0; number_of_printed_zeros < number_of_insignificant_zeros; number_of_printed_zeros++)
             {
                 printf("0");
             }
             printf("%d\n", ERROR);
+
+            DESCRIPTION_OF_ERRORS;
 
             return ERROR;
         }
@@ -127,12 +130,7 @@ int stack_err_error(int ERROR)
     }
     printf("%d\n", ERROR);
 
-    DESCR_(STACK_DID_NOT_INITIALIZED);
-    DESCR_(STACK_POINTER_IS_NULL);
-    DESCR_(STACK_OVERFLOW);
-    DESCR_(STACK_UNDERFLOW);
-    DESCR_(STACK_BAD_CAPACITY);
-    DESCR_(STACK_BAD_SIZE);
+    DESCRIPTION_OF_ERRORS;
 
     return ERROR;
 }
