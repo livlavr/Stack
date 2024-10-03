@@ -1,7 +1,9 @@
 #ifndef STACK_H_
 #define STACK_H_
 
-typedef int stack_elem;
+#include <cstdint>
+
+#include "stack_private.h"
 
 enum stack_errors
 {
@@ -19,6 +21,11 @@ enum stack_errors
     STACK_BAD_RIGHT_CANARY        = 1000000000,
     NUMBER_OF_ERRORS              = 10
 
+};
+
+enum DUMP_AND_CTOR_ERRORS
+{
+    DUMP_FILE_OPENING_ERROR = 100
 };
 
 struct stack_info
@@ -44,11 +51,6 @@ struct stack
     uint64_t     right_canary; //DEBUG
 };
 
-int stack_ctor     (stack* stack, int capacity);
-int stack_push     (stack* stack, stack_elem value);
-int stack_pop      (stack* stack, stack_elem* value);
-int stack_dtor     (stack* stack);
-
 #define DESCR_(ERROR) printf("%s - %d\n", #ERROR, ERROR)
 
 #define DESCRIPTION_OF_ERRORS                  \
@@ -67,4 +69,6 @@ int stack_dtor     (stack* stack);
 
 #define CANARY_SIZE (int)(sizeof(uint64_t) / sizeof(stack_elem))
 
+int stack_ctor     (stack* stack, int capacity);
+int stack_dump     (stack* stack);
 #endif

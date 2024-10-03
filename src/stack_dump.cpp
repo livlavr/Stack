@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "stack_dump.h"
+#include "stack.h"
 #include "debug_macros.h"
 
 static const stack_elem POISON            = 109093; //DEBUG?

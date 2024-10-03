@@ -3,10 +3,11 @@
 #include <string.h>
 #include <math.h>
 
+#include "stack_private.h"
 #include "stack.h"
 #include "recalloc.h"
-#include "stack_dump.h"
 #include "debug_macros.h"
+#include "check_expression.h"
 
 static const stack_elem POISON              = 109093; //DEBUG?
 static const size_t     OK                  = 1; //DEBUG
@@ -82,7 +83,7 @@ static int stack_err_error(int ERROR) //TODO sep in other file
     return ERROR;
 }
 
-static int stack_ok(stack* stack, const char* function) //TODO valid test //TODO add insignificant zeros
+static int stack_ok(stack* stack, const char* function) //TODO valid test
 {
     //TODO double initialization
     if(strcmp(function, "stack_ctor") && (stack->initialized == STACK_DID_NOT_INITIALIZED))
@@ -168,8 +169,7 @@ int stack_ctor(stack* stack, int capacity)
     stack->initialized = STACK_INITIALIZED;
     stack->error       = NO_ERRORS;
 
-    struct stack stack_copy = *stack;
-    $STACK_DUMP(stack_copy);
+    stack_private_dump(stack, __LINE__, __FILE__, __PRETTY_FUNCTION__);
 
     check_expression(!stack_ok(stack, __func__), "STACK_CTOR" && !OK);
 
@@ -188,8 +188,7 @@ int stack_push(stack* stack, int value)
     stack->data[stack->size] = value;
     stack->size++;
 
-    struct stack stack_copy = *stack;
-    $STACK_DUMP(stack_copy);
+    stack_private_dump(stack, __LINE__, __FILE__, __PRETTY_FUNCTION__);
 
     check_expression(!stack_ok(stack, __func__), "STACK_PUSH" && !OK);
 
@@ -210,8 +209,7 @@ int stack_pop(stack* stack, stack_elem* value)
     stack->data[stack->size - 1] = POISON; //DEBUG
     stack->size--;
 
-    struct stack stack_copy = *stack;
-    $STACK_DUMP(stack_copy);
+    stack_private_dump(stack, __LINE__, __FILE__, __PRETTY_FUNCTION__);
 
     check_expression(!stack_ok(stack, "stack_pop_end"), ("STACK_POP" && !OK));
 

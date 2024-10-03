@@ -1,11 +1,19 @@
 #ifndef STACK_PRIVATE_H_
 #define STACK_PRIVATE_H_
 
-static const stack_elem POISON              = 109093; //DEBUG?
-static const size_t     OK                  = 1; //DEBUG
-static const uint64_t   STRUCT_STACK_CANARY = 808; //DEBUG //TODO rand values
-static const uint64_t   STACK_CANARY        = 707; //DEBUG //TODO rand values and int <- ull conversion
+typedef int stack_elem;
 
+struct stack;
 
+stack* create_stack();
+
+int stack_private_ctor(stack* stack, int capacity, size_t line, const char* file);
+int stack_push     (stack* stack, stack_elem value);
+int stack_pop      (stack* stack, stack_elem* value);
+int stack_private_dump(stack* stack, size_t line, const char* file, const char* function);
+int stack_dtor     (stack* stack);
+int stack_dump_file_cleaning();
+
+#define getname(a) #a
 
 #endif
