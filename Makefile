@@ -50,6 +50,7 @@ ded : $(addprefix $(SRC_DIR), $(SRC))
 	@printf "$(YELLOW_TEXT)SKOLKO MOJNO BOJE MOY BLYAT'$(DEFAULT_TEXT)\n"
 
 flash:
+	clear
 	make clean
 	make ded
 	./$(TARGET)
