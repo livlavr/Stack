@@ -10,13 +10,13 @@
 #include "check_expression.h"
 
 static const stack_elem POISON              = 109093; //DEBUG?
-static const size_t     OK                  = 1; //DEBUG
-static const uint64_t   STRUCT_STACK_CANARY = 808; //DEBUG //TODO rand values
-static const uint64_t   STACK_CANARY        = 707; //DEBUG //TODO rand values and int <- ull conversion
+static const size_t     OK                  = 1;   //DEBUG
+static const stack_elem STRUCT_STACK_CANARY = 808; //DEBUG //TODO rand values
+static const stack_elem STACK_CANARY        = 707; //DEBUG //TODO rand values
 
-static int stack_ok       (stack* stack, const char* function);
-static int stack_err_error(int ERROR);
 static int stack_resize   (stack* stack, int new_size);
+static int stack_err_error(int ERROR);
+static int stack_ok       (stack* stack, const char* function);
 
 static int stack_resize(stack* stack, int new_size) //TODO DO_NOT_CALL_ME
 {
