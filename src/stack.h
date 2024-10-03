@@ -48,9 +48,6 @@ int stack_ctor     (stack* stack, int capacity);
 int stack_push     (stack* stack, stack_elem value);
 int stack_pop      (stack* stack, stack_elem* value);
 int stack_dtor     (stack* stack);
-int stack_ok       (stack* stack, const char* function);
-int stack_err_error(int ERROR);
-int stack_resize   (stack* stack, int new_size);
 
 #define DESCR_(ERROR) printf("%s - %d\n", #ERROR, ERROR)
 
