@@ -1,6 +1,6 @@
 CXX          = gcc-14
 
-SRC          = main.cpp stack.cpp recalloc.cpp defined_dump_and_ctor.cpp
+SRC          = main.cpp stack.cpp recalloc.cpp stack_dump.cpp
 
 BUILD_DIR    = ./build/
 SRC_DIR      = ./src/
@@ -48,6 +48,11 @@ $(OBJECT) : %.o : %.cpp
 ded : $(addprefix $(SRC_DIR), $(SRC))
 	$(CXX) $^ -o $(TARGET) $(DED_FLAGS)
 	@printf "$(YELLOW_TEXT)SKOLKO MOJNO BOJE MOY BLYAT'$(DEFAULT_TEXT)\n"
+
+flash:
+	make clean
+	make ded
+	./$(TARGET)
 
 doxy :
 	doxygen

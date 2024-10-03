@@ -5,7 +5,7 @@
 #include "stack.h"
 #include "recalloc.h"
 #include "debug_macros.h"
-#include "defined_dump_and_ctor.h"
+#include "stack_dump.h"
 
 int main() //TODO how to do MakeF see when .h is updated?
 {
@@ -13,14 +13,29 @@ int main() //TODO how to do MakeF see when .h is updated?
 
     stack st = {};
     int x = 0;
-    $STACK_CTOR(st, 10);
-    // stack_push(&st, 1);
+    // $STACK_DUMP(st);
+    $STACK_CTOR(st, 3);
+    stack_push(&st, 1);
+    stack_push(&st, 2);
+    stack_push(&st, 3);
+    stack_push(&st, 4);
+    stack_push(&st, 1);
+    stack_push(&st, 2);
+    stack_pop(&st, &x);
+    stack_push(&st, 4);
+    stack_pop(&st, &x);
+    stack_pop(&st, &x);
+    stack_pop(&st, &x);
+    stack_pop(&st, &x);
+    stack_pop(&st, &x);
     // stack_pop(&st, &x);
-    // stack_push(&st, 1);
+    // *(st.data_with_canaries) = 0;
+    // st.right_canary = 52;
+    // st.data = NULL;
+    // st.size = -10;
+    // st.left_canary = 50;
+    // st.capacity = -5;
     // stack_pop(&st, &x);
-    // stack_push(&st, 1);
-    // stack_push(&st, 1);
-    // stack_push(&st, 1);
     stack_dtor(&st);
 
     return 0;

@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "stack.h"
 #include "recalloc.h"
+#include "debug_macros.h"
 
 void* recalloc(void* const ptr, size_t old_size, size_t new_size, size_t size_of_type)
 {
@@ -31,7 +33,7 @@ void* recalloc(void* const ptr, size_t old_size, size_t new_size, size_t size_of
     {
         return NULL;
     }
-    memset(new_ptr + old_size * size_of_type, 0, (new_size - old_size) * size_of_type);
+    memset(new_ptr + (old_size) * size_of_type, 0, (new_size - (old_size + CANARY_SIZE)) * size_of_type);//DEBUG
 
     return (void*)new_ptr;
 };

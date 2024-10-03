@@ -8,9 +8,9 @@
     #define DEFAULT_TEXT "\033[0m"
     #define BLUE_TEXT    "\033[36m"
 
-    #define $DEBUG(variable, type_of_output) do                                     \
+    #define $DEBUG(type_of_output, variable) do                                     \
     {                                                                               \
-        printf("< " #type_of_output " > - %s | "                                    \
+        printf("< " type_of_output " > - %s | "                                    \
                BLUE_TEXT   "file - %s | "                                              \
                YELLOW_TEXT "line - %d | "                                           \
                GREEN_TEXT  "function - %s\n"                                        \

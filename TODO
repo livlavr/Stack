@@ -5,4 +5,14 @@
 [x] проверка размера стэка для pop
 [x] ошибка вносится в структуру стэка (в виде двоичного числа)
 [x] после этого стэкОК прерывает программу и выводит StackError (notinit itc)
-[]
+[x] canary
+[x] canary protection & stack protection
+[] static functions
+[] repare dump - seg fault if dump not init stack
+[] double init stack stackerr
+[] ull <- int
+[x] незначащие нули
+[] colorful stackok
+[] sanitizer
+[] ondebug
+[] глобальная переменная

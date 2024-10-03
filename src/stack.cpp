@@ -1,33 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 
 #include "stack.h"
 #include "recalloc.h"
-#include "defined_dump_and_ctor.h"
+#include "stack_dump.h"
+#include "debug_macros.h"
 
-static const stack_elem POISON = 109093; //DEBUG?
-static const size_t OK = 1; //DEBUG
-static const stack_elem STRUCT_STACK_CANARY = 808; //DEBUG
-static const stack_elem STACK_CANARY = 707; //DEBUG
+static const stack_elem POISON              = 109093; //DEBUG?
+static const size_t     OK                  = 1; //DEBUG
+static const uint64_t   STRUCT_STACK_CANARY = 808; //DEBUG //TODO rand values
+static const uint64_t   STACK_CANARY        = 707; //DEBUG //TODO rand values and int <- ull conversion
 
-int stack_ctor(stack* stack, size_t capacity)
+int stack_ctor(stack* stack, int capacity)
 {
     check_expression(!stack_ok(stack, __func__), "STACK_CTOR" && !OK);
 
-    stack->left_canary = STRUCT_STACK_CANARY; //DEBUG
+    stack->left_canary  = STRUCT_STACK_CANARY;  //DEBUG
     stack->right_canary = STRUCT_STACK_CANARY; //DEBUG
 
-    stack->size        = 0;
-    stack->capacity    = capacity;
-    stack->data        = (stack_elem*)calloc(capacity + 2, sizeof(stack_elem)); //DEBUG +2
+    stack->size               = 0;
+    stack->capacity           = capacity;
+    stack->data_with_canaries = (stack_elem*)calloc((size_t)(capacity + 2 * CANARY_SIZE), sizeof(stack_elem)); //DEBUG CANARY_SIZE
+    stack->data               = stack->data_with_canaries + CANARY_SIZE; //DEBUG
 
-    stack->data[0] = STACK_CANARY;//DEBUG
-    stack->data[stack->capacity + 1] = STACK_CANARY;//DEBUG
+    stack->data_with_canaries[0]                      = STACK_CANARY;//DEBUG
+    stack->data_with_canaries[CANARY_SIZE + stack->capacity] = STACK_CANARY;//DEBUG
 
-    stack->data = stack->data + 1;//DEBUG
-
-    for (size_t number_of_element = 0; number_of_element < stack->capacity; number_of_element++)
+    for (int number_of_element = 0; number_of_element < stack->capacity; number_of_element++)
     {
         stack->data[number_of_element] = POISON;
     }
@@ -68,16 +69,18 @@ int stack_pop(stack* stack, stack_elem* value)
 
     if (stack->size * 4 <= stack->capacity)
     {
-        stack->capacity = (size_t)ceil(stack->capacity / 2);
+        stack_resize(stack, (int)ceil(stack->capacity / 2));
         //TODO If push and pop recently inited stack capacity will become less then user asked. Is it ok?
     }
 
     *value = stack->data[stack->size - 1];
-    stack->data[stack->size - 1] = POISON;
+    stack->data[stack->size - 1] = POISON; //DEBUG
     stack->size--;
 
     struct stack stack_copy = *stack;
     $STACK_DUMP(stack_copy);
+
+    check_expression(!stack_ok(stack, "stack_pop_end"), ("STACK_POP" && !OK));
 
     return 0;
 }
@@ -88,30 +91,40 @@ int stack_dtor(stack* stack)
 
     stack->size     = 0;
     stack->capacity = 0;
-    free(&stack->data[-1]);
+    free(stack->data_with_canaries);
     stack->data = NULL;
 
     return 0;
 }
 
-int stack_resize(stack* stack, size_t new_size) //TODO DO_NOT_CALL_ME
+int stack_resize(stack* stack, int new_size) //TODO DO_NOT_CALL_ME
 {
     check_expression(!stack_ok(stack, __func__), "STACK_RESIZE" && !OK);
 
     if(stack->capacity < new_size)
     {
-        stack->data = (stack_elem*)recalloc(stack->data, stack->capacity,
-                       new_size, sizeof(stack_elem));
-        stack->capacity *= 2;
+        stack->data_with_canaries = (stack_elem*)recalloc(stack->data_with_canaries, (size_t)(stack->capacity + 2 * CANARY_SIZE),
+                       (size_t)(new_size + 2 * CANARY_SIZE), sizeof(stack_elem));//DEBUG
+        stack->data = stack->data_with_canaries + CANARY_SIZE;//DEBUG CANARY_SIZE
 
-        for (size_t number_of_element = stack->size; number_of_element < stack->capacity; number_of_element++)
+        stack->capacity = new_size;
+
+        for (int number_of_element = stack->size; number_of_element < stack->capacity; number_of_element++)
         {
-            stack->data[number_of_element] = POISON;
+            stack->data[number_of_element] = POISON;//DEBUG
         }
+
+        stack->data_with_canaries[stack->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
     }
     else
     {
-        stack->data = (stack_elem*)realloc(stack->data, new_size * sizeof(stack_elem));
+        stack->data_with_canaries = (stack_elem*)realloc(stack->data_with_canaries,
+                                    (size_t)(new_size + 2 * CANARY_SIZE) * sizeof(stack_elem));//DEBUG +2
+        stack->data = stack->data_with_canaries + CANARY_SIZE;//DEBUG CANARY_SIZE
+
+        stack->capacity = new_size;
+
+        stack->data_with_canaries[stack->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
     }
 
     check_expression(!stack_ok(stack, __func__), "STACK_RESIZE" && !OK);
@@ -119,15 +132,15 @@ int stack_resize(stack* stack, size_t new_size) //TODO DO_NOT_CALL_ME
     return 0;
 }
 
-int stack_err_error(int ERROR)
+int stack_err_error(int ERROR) //TODO sep in other file
 {
-    size_t power_of_error = 1;
+    int power_of_error = 1;
     size_t number_of_insignificant_zeros = NUMBER_OF_ERRORS;
-    while(power_of_error <= 10 * (NUMBER_OF_ERRORS - 1))
+    printf("YOUR ERROR CODE: ");
+    while(power_of_error <= pow(10, (NUMBER_OF_ERRORS - 1)))
     {
         if(ERROR < power_of_error)
         {
-            printf("YOUR ERROR CODE: ");
             for(size_t number_of_printed_zeros = 0; number_of_printed_zeros < number_of_insignificant_zeros; number_of_printed_zeros++)
             {
                 printf("0");
@@ -151,11 +164,11 @@ int stack_err_error(int ERROR)
 
 int stack_ok(stack* stack, const char* function) //TODO valid test //TODO add insignificant zeros
 {
-    if(stack->initialized == STACK_DID_NOT_INITIALIZED && function != "stack_ctor")
+    //TODO double initialization
+    if(strcmp(function, "stack_ctor") && (stack->initialized == STACK_DID_NOT_INITIALIZED))
     {
         stack->error += STACK_DID_NOT_INITIALIZED;
-
-        return stack->error;
+        return stack_err_error(stack->error);;
     }
 
     if(stack->capacity < stack->size)
@@ -163,7 +176,7 @@ int stack_ok(stack* stack, const char* function) //TODO valid test //TODO add in
         stack->error += STACK_OVERFLOW;
     }
 
-    if(stack->size == 0 && function == "stack_pop")
+    if(!strcmp(function, "stack_pop") && stack->size == 0)
     {
         stack->error += STACK_UNDERFLOW;
     }
@@ -178,30 +191,30 @@ int stack_ok(stack* stack, const char* function) //TODO valid test //TODO add in
         stack->error += STACK_BAD_SIZE;
     }
 
-    if(stack->data == NULL && function != "stack_ctor")
+    if(strcmp(function, "stack_ctor") && stack->data == NULL)
     {
         stack->error += STACK_POINTER_IS_NULL;
     }
 
-    if(stack->left_canary != STRUCT_STACK_CANARY && function != "stack_ctor")
+    if(strcmp(function, "stack_ctor") && stack->left_canary != STRUCT_STACK_CANARY)
     {
         stack->error += STACK_STRUCT_BAD_LEFT_CANARY;
     }
 
-    if(stack->right_canary != STRUCT_STACK_CANARY && function != "stack_ctor")
+    if(strcmp(function, "stack_ctor") && stack->right_canary != STRUCT_STACK_CANARY)
     {
         stack->error += STACK_STRUCT_BAD_RIGHT_CANARY;
     }
 
-    // if(stack->data[-1] != STACK_CANARY && function != "stack_ctor")
-    // {
-    //     stack->error += STACK_BAD_LEFT_CANARY;
-    // }
-    // printf("%d", stack->data[stack->capacity - 2]);
-    // if(stack->data[stack->capacity - 1] != STACK_CANARY && function != "stack_ctor")
-    // {
-    //     stack->error += STACK_BAD_RIGHT_CANARY;
-    // }
+    if(strcmp(function, "stack_ctor") && stack->data_with_canaries[0] != STACK_CANARY)
+    {
+        stack->error += STACK_BAD_LEFT_CANARY;
+    }
+
+    if(strcmp(function, "stack_ctor") && stack->data_with_canaries[CANARY_SIZE + stack->capacity] != STACK_CANARY)
+    {
+        stack->error += STACK_BAD_RIGHT_CANARY;
+    }
 
     if(stack->error == 0)
     {
