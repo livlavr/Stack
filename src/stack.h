@@ -9,18 +9,18 @@ enum stack_errors
 {
     NO_ERRORS                     = 0,
     STACK_INITIALIZED             = 2,
-    STACK_DID_NOT_INITIALIZED     = 1,
-    STACK_POINTER_IS_NULL         = 10,
-    STACK_OVERFLOW                = 100,
-    STACK_UNDERFLOW               = 1000,
-    STACK_BAD_CAPACITY            = 10000,
-    STACK_BAD_SIZE                = 100000,
-    STACK_STRUCT_BAD_LEFT_CANARY  = 1000000,
-    STACK_STRUCT_BAD_RIGHT_CANARY = 10000000,
-    STACK_BAD_LEFT_CANARY         = 100000000,
-    STACK_BAD_RIGHT_CANARY        = 1000000000,
-    NUMBER_OF_ERRORS              = 10
-
+    STACK_DID_NOT_INITIALIZED     = 1 << 0,
+    STACK_DOUBLE_INITIALIZING     = 1 << 1,
+    STACK_POINTER_IS_NULL         = 1 << 2,
+    STACK_OVERFLOW                = 1 << 3,
+    STACK_UNDERFLOW               = 1 << 4,
+    STACK_BAD_CAPACITY            = 1 << 5,
+    STACK_BAD_SIZE                = 1 << 6,
+    STACK_STRUCT_BAD_LEFT_CANARY  = 1 << 7,
+    STACK_STRUCT_BAD_RIGHT_CANARY = 1 << 8,
+    STACK_BAD_LEFT_CANARY         = 1 << 9,
+    STACK_BAD_RIGHT_CANARY        = 1 << 10,
+    NUMBER_OF_ERRORS              = 11
 };
 
 enum DUMP_AND_CTOR_ERRORS
@@ -30,6 +30,7 @@ enum DUMP_AND_CTOR_ERRORS
 
 struct stack_info
 {
+    const char* dump_filename;
     size_t      stack_born_line;
     const char* stack_born_file;
     const char* stack_name;
@@ -51,10 +52,14 @@ struct stack
     uint64_t     right_canary; //DEBUG
 };
 
-#define DESCR_(ERROR) printf("%s - %d\n", #ERROR, ERROR)
+#define DESCR_(error) \
+    printf("%s ", #error);\
+    binary_code_output(error);\
+    printf("\n")
 
 #define DESCRIPTION_OF_ERRORS                  \
     DESCR_(STACK_DID_NOT_INITIALIZED);         \
+    DESCR_(STACK_DOUBLE_INITIALIZING);         \
     DESCR_(STACK_POINTER_IS_NULL);             \
     DESCR_(STACK_OVERFLOW);                    \
     DESCR_(STACK_UNDERFLOW);                   \

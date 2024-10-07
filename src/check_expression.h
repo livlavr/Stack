@@ -7,10 +7,12 @@ enum TYPE_OF_ERROR
     DOUBLE_IS_NAN   = 2,
     FILE_OPEN_ERROR = 3,
     FILE_READ_ERROR = 4,
-    STAT_ERROR      = 5
+    STAT_ERROR      = 5,
+    CALLOC_ERROR    = 6
 };
 
 #ifndef NDEBUG
+    #include <cstdlib>
 
     #define check_expression(condition, message) do                              \
     {                                                                            \
