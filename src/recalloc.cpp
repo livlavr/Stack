@@ -6,6 +6,7 @@
 #include "stack.h"
 #include "recalloc.h"
 #include "debug_macros.h"
+#include "stack_security.h"
 
 void* recalloc(void* const ptr, size_t old_size, size_t new_size, size_t size_of_type)
 {

@@ -3,14 +3,14 @@
 #include <stdlib.h>
 
 #include "stack_private.h"
-#include "recalloc.h"
 #include "debug_macros.h"
+#include "recalloc.h"
 
 int main() //TODO how to do MakeF see when .h is updated?
 {
     stack_dump_file_cleaning();
 
-    stack* st = create_stack();
+    stack* st = create_stack_pointer();
     stack_private_ctor(st, 10, __LINE__, __FILE__);
     int x = 0;
     stack_push(st, 1);

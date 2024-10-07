@@ -16,8 +16,8 @@ enum TYPE_OF_ERROR
     {                                                                            \
         if (!(condition))                                                        \
         {                                                                        \
-            printf("ERROR (%s), file: %s, function: %s, line: %d\n", #condition, \
-            __FILE__, __FUNCTION__, __LINE__);                                   \
+            printf("ERROR (%s) : (%s), file: %s, function: %s, line: %d\n", #condition, \
+            #message, __FILE__, __FUNCTION__, __LINE__);                                   \
             exit(0);                                                             \
         }                                                                        \
     } while(0)

@@ -4,7 +4,7 @@
 #include "stack_private.h"
 #include "stack.h"
 
-stack* create_stack()
+stack* create_stack_pointer()
 {
     stack* st = (stack*)calloc(1, sizeof(stack));
     return st;

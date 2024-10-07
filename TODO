@@ -4,15 +4,51 @@
 [x] проверка хватает ли места для push
 [x] проверка размера стэка для pop
 [x] ошибка вносится в структуру стэка (в виде двоичного числа)
-[x] после этого стэкОК прерывает программу и выводит StackError (notinit itc)
+[] после этого стэкОК прерывает программу и выводит StackError (notinit itc)
 [x] canary
 [x] canary protection & stack protection
 [x] static functions
-[] repare dump - seg fault if dump not init stack
-[] double init stack stackerr
-[] ull <- int
 [x] незначащие нули
-[] colorful stackok
-[] sanitizer
-[] ondebug
+[] check null pointers - MORE ASSERTS
+[x] ERROR name
+[] хавать название файла для вывода dump
+[] repare dump - seg fault if dump not init stack
+[] user can input a file output name
+[] I (dir) - чтобы разделить .h в другую папку
+[] asserts in dumb
+[] stack null
+[] dump пиздец
+[] пофиксить вывод имени стэка в dump
+[] enum с побитовыми
+[] раскидать stackok по функциям
+[] say
+[] message
+[] option is need to allow stack_ctor make a different dump_file for every stack
+[] верификатор проверяет error на ошибку и если что вносит туда новую
+[] стэк ресайз проверяет нужно ресайзить или нет(? хз)
+[] ресайз ап и ресайз даун
+[] макросы чтобы определять где упал стэк, но юзер
+может вызвать функцию и отправить туда null null null
+[] dump должен учитывать тип stack_elem
+[] stack_err_error long int
+[] нормальные канарейки
+[] asserts doesnt turn down when ndebug mode
+[] stackok before dump
+[] поменять long int
+[] ull <- int
+[] sanitizer проеб памяти
+free stak information
+free if check_expression
+free в месте окончания программы
 [] глобальная переменная
+[] double init stack stackerr
+[] check_expression message
+[] colorful stackok
+[] ondebug
+[] прописать vscode, build и мб еще что-то в gitignore
+[] как нормально реализовать stack_dump, чтобы он не стирал
+к хуям собачим файл при инициализации второго стэка с таким же dump_file?
+[] gitsub - check_expression, recalloc
+[] How can I defence not stack pointer?
+[] null check
+[] Hash

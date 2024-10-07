@@ -2,8 +2,8 @@
 
 #include "stack.h"
 #include "debug_macros.h"
-
-static const stack_elem POISON            = 109093; //DEBUG?
+#include "stack_consts.h"
+#include "stack_security.h"
 
 int stack_dump_file_cleaning()
 {
