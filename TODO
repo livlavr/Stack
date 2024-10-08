@@ -49,10 +49,11 @@
 [] double init stack stackerr
 [x] check_expression message
 [x] colorful stackok
-[] ondebug
+[] ndebug
 [] прописать vscode, build и мб еще что-то в gitignore
+[] How could i make dump.txt in certain dir?
 [x] как нормально реализовать stack_dump, чтобы он не стирал
-к хуям собачим файл при инициализации второго стэка с таким же dump_file?
+    к хуям собачим файл при инициализации второго стэка с таким же dump_file?
 [] gitsub - check_expression, recalloc
 [] How can I defence not stack pointer?
 [] Hash

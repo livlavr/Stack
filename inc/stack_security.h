@@ -5,33 +5,6 @@
 #include "stack_consts.h"
 #include "color_print.h"
 
-enum stack_errors
-{
-    NO_ERRORS                     = 0,
-    STACK_INITIALIZED             = 2,
-    STACK_DID_NOT_INITIALIZED     = 1 << 0,
-    STACK_DOUBLE_INITIALIZING     = 1 << 1,
-    STACK_POINTER_IS_NULL         = 1 << 2,
-    STACK_OVERFLOW                = 1 << 3,
-    STACK_UNDERFLOW               = 1 << 4,
-    STACK_BAD_CAPACITY            = 1 << 5,
-    STACK_BAD_SIZE                = 1 << 6,
-    STACK_STRUCT_BAD_LEFT_CANARY  = 1 << 7,
-    STACK_STRUCT_BAD_RIGHT_CANARY = 1 << 8,
-    STACK_BAD_LEFT_CANARY         = 1 << 9,
-    STACK_BAD_RIGHT_CANARY        = 1 << 10,
-    NUMBER_OF_ERRORS              = 11
-};
-
-enum DUMP_AND_CTOR_ERRORS
-{
-    FILE_OPENING_ERROR = 100
-};
-
-int stack_err_error    (int error);
-int stack_ok           (stack* stack);
-void binary_code_output(int error);
-
 #define DESCR_(error, big_error) \
     if ((big_error / error & 1) == 1)\
     {\
@@ -70,5 +43,32 @@ void binary_code_output(int error);
         return message;                                                       \
     }                                                                        \
 } while(0)
+
+enum stack_errors
+{
+    NO_ERRORS                     = 0,
+    STACK_INITIALIZED             = 2,
+    STACK_DID_NOT_INITIALIZED     = 1 << 0,
+    STACK_DOUBLE_INITIALIZING     = 1 << 1,
+    STACK_POINTER_IS_NULL         = 1 << 2,
+    STACK_OVERFLOW                = 1 << 3,
+    STACK_UNDERFLOW               = 1 << 4,
+    STACK_BAD_CAPACITY            = 1 << 5,
+    STACK_BAD_SIZE                = 1 << 6,
+    STACK_STRUCT_BAD_LEFT_CANARY  = 1 << 7,
+    STACK_STRUCT_BAD_RIGHT_CANARY = 1 << 8,
+    STACK_BAD_LEFT_CANARY         = 1 << 9,
+    STACK_BAD_RIGHT_CANARY        = 1 << 10,
+    NUMBER_OF_ERRORS              = 11
+};
+
+enum DUMP_AND_CTOR_ERRORS
+{
+    FILE_OPENING_ERROR = 100
+};
+
+int stack_err_error    (int error);
+int stack_ok           (stack* stack);
+void binary_code_output(int error);
 
 #endif

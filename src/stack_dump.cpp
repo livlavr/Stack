@@ -10,9 +10,9 @@ int stack_private_dump(stack* stack)
 {
     check_expression(stack != NULL, POINTER_IS_NULL);
 
-    // stack_check(!stack_ok(stack), "STACK_DUMP" && !OK, file, line); //TODO
+    // stack_check(!stack_ok(stack), "STACK_DUMP" && !OK, file, line); //TODO turn on
 
-    FILE* dumb_file = fopen(stack->dump_file_name, "a"); //TODO how could i make dump.txt in certain dir?
+    FILE* dumb_file = fopen(stack->dump_file_name, "a");
 
     if (dumb_file == NULL)
     {
