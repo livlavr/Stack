@@ -7,6 +7,7 @@
 #include "stack_consts.h"
 #include "stack_private.h"
 #include "stack.h"
+#include "debug_macros.h"
 #include "color_print.h"
 
 void binary_code_output(int error)
@@ -32,87 +33,66 @@ int stack_err_error(int error)
     return error;
 }
 
-int stack_ok(stack* stack, const char* function) //TODO valid test //check stack error in the beginning
+int stack_ok(stack* stack) //TODO valid test //check stack error in the beginning
 {
-    //TODO check null stack
-    if(stack->error != 0)
-    {
-        return stack_err_error(stack->error);
-    }
+    int new_error_code = NO_ERRORS;
 
-    if(strcmp(function, "stack_ctor") && (stack->initialized == STACK_DID_NOT_INITIALIZED))
+    //TODO hash check
+
+    if(stack->initialized == STACK_DID_NOT_INITIALIZED)
     {
-        stack->error += STACK_DID_NOT_INITIALIZED;
+        new_error_code += STACK_DID_NOT_INITIALIZED;
+
+        stack->error = new_error_code;
+
         return stack_err_error(stack->error);
     }
 
     if(stack->capacity < stack->size)
     {
-        stack->error += STACK_OVERFLOW;
-    }
-
-    if(!strcmp(function, "stack_pop") && stack->size == 0)
-    {
-        stack->error += STACK_UNDERFLOW;
+        new_error_code += STACK_OVERFLOW;
     }
 
     if(stack->capacity < 0)
     {
-        stack->error += STACK_BAD_CAPACITY;
+        new_error_code += STACK_BAD_CAPACITY;
     }
 
     if(stack->size < 0)
     {
-        stack->error += STACK_BAD_SIZE;
+        new_error_code += STACK_BAD_SIZE;
     }
 
     if(stack->left_canary != STRUCT_STACK_CANARY)
     {
-        stack->error += STACK_STRUCT_BAD_LEFT_CANARY;
+        new_error_code += STACK_STRUCT_BAD_LEFT_CANARY;
     }
 
     if(stack->right_canary != STRUCT_STACK_CANARY)
     {
-        stack->error += STACK_STRUCT_BAD_RIGHT_CANARY;
+        new_error_code += STACK_STRUCT_BAD_RIGHT_CANARY;
     }
 
     if(stack->data_with_canaries[0] != STACK_CANARY)
     {
-        stack->error += STACK_BAD_LEFT_CANARY;
+        new_error_code += STACK_BAD_LEFT_CANARY;
     }
 
     if(stack->data_with_canaries[CANARY_SIZE + stack->capacity] != STACK_CANARY)
     {
-        stack->error += STACK_BAD_RIGHT_CANARY;
+        new_error_code += STACK_BAD_RIGHT_CANARY;
     }
 
-    if(stack->error == 0)
+    if(new_error_code == NO_ERRORS)
     {
+        stack->error = NO_ERRORS;
+
         return NO_ERRORS;
     }
     else
     {
-        return stack_err_error(stack->error);
-    }
-}
+        stack->error = new_error_code;
 
-int stack_ctor_ok(stack* stack)
-{
-    if(stack->error != 0)
-    {
         return stack_err_error(stack->error);
     }
-    if(stack->initialized == STACK_INITIALIZED)
-    {
-        stack->error += STACK_DOUBLE_INITIALIZING;
-    }
-    if(stack->capacity < 0)
-    {
-        stack->error += STACK_BAD_CAPACITY;
-    }
-    if(stack->size < 0)
-    {
-        stack->error += STACK_BAD_SIZE;
-    }
-    return stack_err_error(stack->error);
 }

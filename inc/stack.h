@@ -27,7 +27,7 @@ struct stack
     int          size;
     int          capacity;
     stack_errors initialized = STACK_DID_NOT_INITIALIZED;
-    int          error = NO_ERRORS;//DEBUG
+    int          error       = NO_ERRORS;//DEBUG
     stack_elem   right_canary; //DEBUG
 };
 

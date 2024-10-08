@@ -29,8 +29,7 @@ enum DUMP_AND_CTOR_ERRORS
 };
 
 int stack_err_error    (int error);
-int stack_ok           (stack* stack, const char* function);
-int stack_ctor_ok      (stack* stack);
+int stack_ok           (stack* stack);
 void binary_code_output(int error);
 
 #define DESCR_(error, big_error) \
@@ -58,6 +57,6 @@ void binary_code_output(int error);
     DESCR_(STACK_BAD_LEFT_CANARY, big_error);             \
     DESCR_(STACK_BAD_RIGHT_CANARY, big_error);            \
 
-#define CANARY_SIZE (int)(sizeof(uint64_t) / sizeof(stack_elem))//DEBUG
+#define CANARY_SIZE (int)(sizeof(stack_elem) / sizeof(stack_elem))//DEBUG
 
 #endif

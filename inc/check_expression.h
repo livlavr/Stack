@@ -21,10 +21,10 @@ enum TYPE_OF_ERROR
         int condition_return = condition;                                            \
         if (!(condition_return))                                                        \
         {                                                                        \
-            color_print(YELLOW_TEXT, BOLD, "ERROR (%s) : (%s), file: %s, function: %s, line: %d\n", #condition, \
+            color_print(YELLOW_TEXT, BOLD, "ERROR %s : %s, file: %s, function: %s, line: %d\n", #condition, \
             #message, __FILE__, __FUNCTION__, __LINE__);                                   \
             printf("\n");\
-            return condition_return;                                                             \
+            return message;                                                       \
         }                                                                        \
     } while(0)
 
@@ -32,7 +32,7 @@ enum TYPE_OF_ERROR
     {                                                                            \
         if (!(condition))                                                        \
         {                                                                        \
-            color_print(RED_TEXT, BOLD, "ERROR (%s) : (%s), file: %s, function: %s, line: %d\n", #condition, \
+            color_print(RED_TEXT, BOLD, "ERROR %s : %s, file: %s, function: %s, line: %d\n", #condition, \
             #message, __FILE__, __FUNCTION__, __LINE__);                                   \
             printf("\n");\
             exit(0);                                                         \

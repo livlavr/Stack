@@ -11,6 +11,8 @@ stack* create_stack_pointer()
 
     warning(st != NULL, CALLOC_ERROR);
 
+    *st = {};
+
     return st;
 }
 
@@ -18,6 +20,7 @@ int stack_private_ctor(stack* stack, int capacity, const char* file,
                        size_t line, const char* name)
 {
     check_expression(stack != NULL, POINTER_IS_NULL);
+    check_expression(capacity > 0, STACK_BAD_CAPACITY);
 
     stack->information = (stack_info*)calloc(1, sizeof(stack_info));
 

@@ -17,6 +17,8 @@ int stack_dtor     (stack* stack, const char* file, size_t line);
 
 #define getname(a) #a
 
+// #define get_stack_pointer() create_stack_pointer()
+
 #define stack_init(stack_pointer, capacity)\
     stack_private_ctor(stack_pointer, capacity, __FILE__, __LINE__, #stack_pointer)
 

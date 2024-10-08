@@ -4,7 +4,7 @@
 [x] проверка хватает ли места для push
 [x] проверка размера стэка для pop
 [x] ошибка вносится в структуру стэка (в виде двоичного числа)
-[] после этого стэкОК прерывает программу и выводит StackError (notinit itc)
+[x] после этого стэкОК прерывает программу и выводит StackError (notinit itc)
 [x] canary
 [x] canary protection & stack protection
 [x] static functions
@@ -20,7 +20,7 @@
 [] make dir dumps if its doesnt exist
 [x] stack null
 [x] dump пиздец
-[] пофиксить вывод имени стэка в dump
+[x] пофиксить вывод имени стэка в dump
 [x] enum с побитовыми
 [] раскидать stackok по функциям
 [] say
@@ -30,7 +30,7 @@
 [x] стэк ресайз проверяет нужно ресайзить или нет(? хз)
 [x] ресайз ап и ресайз даун
 [] NDEBUG in makefile?
-[] макросы чтобы определять где упал стэк, но юзер
+[x] макросы чтобы определять где упал стэк, но юзер
 может вызвать функцию и отправить туда null null null
 [] dump должен учитывать тип stack_elem
 [] stackOK зануляет параметр stack->error если не обнаружит ошибок
@@ -45,8 +45,8 @@ free if check_expression
 free в месте окончания программы
 [] глобальная переменная
 [] double init stack stackerr
-[] check_expression message
-[] colorful stackok
+[x] check_expression message
+[x] colorful stackok
 [] ondebug
 [] прописать vscode, build и мб еще что-то в gitignore
 [x] как нормально реализовать stack_dump, чтобы он не стирал
