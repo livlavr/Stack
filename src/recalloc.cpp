@@ -14,7 +14,7 @@ void* recalloc(void* const ptr, size_t old_size, size_t new_size, size_t size_of
 
     if(ptr == NULL || old_size == 0)
     {
-        new_ptr = (char*)calloc(new_size, size_of_type)
+        new_ptr = (char*)calloc(new_size, size_of_type);
 
         if(new_ptr == NULL)
         {
