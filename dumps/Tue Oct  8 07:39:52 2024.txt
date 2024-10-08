@@ -1,0 +1,417 @@
+stack st[0x13f605f00] at src/stack.cpp : 118 : stack_ctor born at src/main.cpp : 14
+initialized = 2
+capacity    = 10
+size        = 0
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+[0][0x13f704488] = 109093 [POISON]
+[1][0x13f70448c] = 109093 [POISON]
+[2][0x13f704490] = 109093 [POISON]
+[3][0x13f704494] = 109093 [POISON]
+[4][0x13f704498] = 109093 [POISON]
+[5][0x13f70449c] = 109093 [POISON]
+[6][0x13f7044a0] = 109093 [POISON]
+[7][0x13f7044a4] = 109093 [POISON]
+[8][0x13f7044a8] = 109093 [POISON]
+[9][0x13f7044ac] = 109093 [POISON]
+[canary][0x13f7044b0] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 16 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 5
+size        = 1
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+[1][0x13f70448c] = 109093 [POISON]
+[2][0x13f704490] = 109093 [POISON]
+[3][0x13f704494] = 109093 [POISON]
+[4][0x13f704498] = 109093 [POISON]
+[canary][0x13f70449c] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 17 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 2
+size        = 2
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+*[1][0x13f70448c] = 2
+[canary][0x13f704490] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 18 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 4
+size        = 3
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+*[1][0x13f70448c] = 2
+*[2][0x13f704490] = 3
+[3][0x13f704494] = 109093 [POISON]
+[canary][0x13f704498] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 19 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 4
+size        = 4
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+*[1][0x13f70448c] = 2
+*[2][0x13f704490] = 3
+*[3][0x13f704494] = 4
+[canary][0x13f704498] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 20 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 8
+size        = 5
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+*[1][0x13f70448c] = 2
+*[2][0x13f704490] = 3
+*[3][0x13f704494] = 4
+*[4][0x13f704498] = 1
+[5][0x13f70449c] = 109093 [POISON]
+[6][0x13f7044a0] = 109093 [POISON]
+[7][0x13f7044a4] = 109093 [POISON]
+[canary][0x13f7044a8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 22 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 8
+size        = 6
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+*[1][0x13f70448c] = 2
+*[2][0x13f704490] = 3
+*[3][0x13f704494] = 4
+*[4][0x13f704498] = 1
+*[5][0x13f70449c] = 2
+[6][0x13f7044a0] = 109093 [POISON]
+[7][0x13f7044a4] = 109093 [POISON]
+[canary][0x13f7044a8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 23 : stack_pop born at src/main.cpp : 14
+initialized = 2
+capacity    = 8
+size        = 5
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+*[1][0x13f70448c] = 2
+*[2][0x13f704490] = 3
+*[3][0x13f704494] = 4
+*[4][0x13f704498] = 1
+[5][0x13f70449c] = 109093 [POISON]
+[6][0x13f7044a0] = 109093 [POISON]
+[7][0x13f7044a4] = 109093 [POISON]
+[canary][0x13f7044a8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 24 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 8
+size        = 6
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+*[1][0x13f70448c] = 2
+*[2][0x13f704490] = 3
+*[3][0x13f704494] = 4
+*[4][0x13f704498] = 1
+*[5][0x13f70449c] = 4
+[6][0x13f7044a0] = 109093 [POISON]
+[7][0x13f7044a4] = 109093 [POISON]
+[canary][0x13f7044a8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 25 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 8
+size        = 7
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+*[1][0x13f70448c] = 2
+*[2][0x13f704490] = 3
+*[3][0x13f704494] = 4
+*[4][0x13f704498] = 1
+*[5][0x13f70449c] = 4
+*[6][0x13f7044a0] = 4
+[7][0x13f7044a4] = 109093 [POISON]
+[canary][0x13f7044a8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 26 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 8
+size        = 8
+error       = 0
+CANARY      = 808
+[canary][0x13f704480] = 707
+*[0][0x13f704488] = 1
+*[1][0x13f70448c] = 2
+*[2][0x13f704490] = 3
+*[3][0x13f704494] = 4
+*[4][0x13f704498] = 1
+*[5][0x13f70449c] = 4
+*[6][0x13f7044a0] = 4
+*[7][0x13f7044a4] = 4
+[canary][0x13f7044a8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 27 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 16
+size        = 9
+error       = 0
+CANARY      = 808
+[canary][0x149004080] = 707
+*[0][0x149004088] = 1
+*[1][0x14900408c] = 2
+*[2][0x149004090] = 3
+*[3][0x149004094] = 4
+*[4][0x149004098] = 1
+*[5][0x14900409c] = 4
+*[6][0x1490040a0] = 4
+*[7][0x1490040a4] = 4
+*[8][0x1490040a8] = 4
+[9][0x1490040ac] = 109093 [POISON]
+[10][0x1490040b0] = 109093 [POISON]
+[11][0x1490040b4] = 109093 [POISON]
+[12][0x1490040b8] = 109093 [POISON]
+[13][0x1490040bc] = 109093 [POISON]
+[14][0x1490040c0] = 109093 [POISON]
+[15][0x1490040c4] = 109093 [POISON]
+[canary][0x1490040c8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 28 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 16
+size        = 10
+error       = 0
+CANARY      = 808
+[canary][0x149004080] = 707
+*[0][0x149004088] = 1
+*[1][0x14900408c] = 2
+*[2][0x149004090] = 3
+*[3][0x149004094] = 4
+*[4][0x149004098] = 1
+*[5][0x14900409c] = 4
+*[6][0x1490040a0] = 4
+*[7][0x1490040a4] = 4
+*[8][0x1490040a8] = 4
+*[9][0x1490040ac] = 4
+[10][0x1490040b0] = 109093 [POISON]
+[11][0x1490040b4] = 109093 [POISON]
+[12][0x1490040b8] = 109093 [POISON]
+[13][0x1490040bc] = 109093 [POISON]
+[14][0x1490040c0] = 109093 [POISON]
+[15][0x1490040c4] = 109093 [POISON]
+[canary][0x1490040c8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 29 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 16
+size        = 11
+error       = 0
+CANARY      = 808
+[canary][0x149004080] = 707
+*[0][0x149004088] = 1
+*[1][0x14900408c] = 2
+*[2][0x149004090] = 3
+*[3][0x149004094] = 4
+*[4][0x149004098] = 1
+*[5][0x14900409c] = 4
+*[6][0x1490040a0] = 4
+*[7][0x1490040a4] = 4
+*[8][0x1490040a8] = 4
+*[9][0x1490040ac] = 4
+*[10][0x1490040b0] = 4
+[11][0x1490040b4] = 109093 [POISON]
+[12][0x1490040b8] = 109093 [POISON]
+[13][0x1490040bc] = 109093 [POISON]
+[14][0x1490040c0] = 109093 [POISON]
+[15][0x1490040c4] = 109093 [POISON]
+[canary][0x1490040c8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 30 : stack_push born at src/main.cpp : 14
+initialized = 2
+capacity    = 16
+size        = 12
+error       = 0
+CANARY      = 808
+[canary][0x149004080] = 707
+*[0][0x149004088] = 1
+*[1][0x14900408c] = 2
+*[2][0x149004090] = 3
+*[3][0x149004094] = 4
+*[4][0x149004098] = 1
+*[5][0x14900409c] = 4
+*[6][0x1490040a0] = 4
+*[7][0x1490040a4] = 4
+*[8][0x1490040a8] = 4
+*[9][0x1490040ac] = 4
+*[10][0x1490040b0] = 4
+*[11][0x1490040b4] = 4
+[12][0x1490040b8] = 109093 [POISON]
+[13][0x1490040bc] = 109093 [POISON]
+[14][0x1490040c0] = 109093 [POISON]
+[15][0x1490040c4] = 109093 [POISON]
+[canary][0x1490040c8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 31 : stack_pop born at src/main.cpp : 14
+initialized = 2
+capacity    = 16
+size        = 11
+error       = 0
+CANARY      = 808
+[canary][0x149004080] = 707
+*[0][0x149004088] = 1
+*[1][0x14900408c] = 2
+*[2][0x149004090] = 3
+*[3][0x149004094] = 4
+*[4][0x149004098] = 1
+*[5][0x14900409c] = 4
+*[6][0x1490040a0] = 4
+*[7][0x1490040a4] = 4
+*[8][0x1490040a8] = 4
+*[9][0x1490040ac] = 4
+*[10][0x1490040b0] = 4
+[11][0x1490040b4] = 109093 [POISON]
+[12][0x1490040b8] = 109093 [POISON]
+[13][0x1490040bc] = 109093 [POISON]
+[14][0x1490040c0] = 109093 [POISON]
+[15][0x1490040c4] = 109093 [POISON]
+[canary][0x1490040c8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 32 : stack_pop born at src/main.cpp : 14
+initialized = 2
+capacity    = 16
+size        = 10
+error       = 0
+CANARY      = 808
+[canary][0x149004080] = 707
+*[0][0x149004088] = 1
+*[1][0x14900408c] = 2
+*[2][0x149004090] = 3
+*[3][0x149004094] = 4
+*[4][0x149004098] = 1
+*[5][0x14900409c] = 4
+*[6][0x1490040a0] = 4
+*[7][0x1490040a4] = 4
+*[8][0x1490040a8] = 4
+*[9][0x1490040ac] = 4
+[10][0x1490040b0] = 109093 [POISON]
+[11][0x1490040b4] = 109093 [POISON]
+[12][0x1490040b8] = 109093 [POISON]
+[13][0x1490040bc] = 109093 [POISON]
+[14][0x1490040c0] = 109093 [POISON]
+[15][0x1490040c4] = 109093 [POISON]
+[canary][0x1490040c8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 33 : stack_pop born at src/main.cpp : 14
+initialized = 2
+capacity    = 16
+size        = 9
+error       = 0
+CANARY      = 808
+[canary][0x149004080] = 707
+*[0][0x149004088] = 1
+*[1][0x14900408c] = 2
+*[2][0x149004090] = 3
+*[3][0x149004094] = 4
+*[4][0x149004098] = 1
+*[5][0x14900409c] = 4
+*[6][0x1490040a0] = 4
+*[7][0x1490040a4] = 4
+*[8][0x1490040a8] = 4
+[9][0x1490040ac] = 109093 [POISON]
+[10][0x1490040b0] = 109093 [POISON]
+[11][0x1490040b4] = 109093 [POISON]
+[12][0x1490040b8] = 109093 [POISON]
+[13][0x1490040bc] = 109093 [POISON]
+[14][0x1490040c0] = 109093 [POISON]
+[15][0x1490040c4] = 109093 [POISON]
+[canary][0x1490040c8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 34 : stack_pop born at src/main.cpp : 14
+initialized = 2
+capacity    = 16
+size        = 8
+error       = 0
+CANARY      = 808
+[canary][0x149004080] = 707
+*[0][0x149004088] = 1
+*[1][0x14900408c] = 2
+*[2][0x149004090] = 3
+*[3][0x149004094] = 4
+*[4][0x149004098] = 1
+*[5][0x14900409c] = 4
+*[6][0x1490040a0] = 4
+*[7][0x1490040a4] = 4
+[8][0x1490040a8] = 109093 [POISON]
+[9][0x1490040ac] = 109093 [POISON]
+[10][0x1490040b0] = 109093 [POISON]
+[11][0x1490040b4] = 109093 [POISON]
+[12][0x1490040b8] = 109093 [POISON]
+[13][0x1490040bc] = 109093 [POISON]
+[14][0x1490040c0] = 109093 [POISON]
+[15][0x1490040c4] = 109093 [POISON]
+[canary][0x1490040c8] = 707
+CANARY      = 808
+
+stack st[0x13f605f00] at src/main.cpp : 35 : stack_pop born at src/main.cpp : 14
+initialized = 2
+capacity    = 16
+size        = 7
+error       = 0
+CANARY      = 808
+[canary][0x149004080] = 707
+*[0][0x149004088] = 1
+*[1][0x14900408c] = 2
+*[2][0x149004090] = 3
+*[3][0x149004094] = 4
+*[4][0x149004098] = 1
+*[5][0x14900409c] = 4
+*[6][0x1490040a0] = 4
+[7][0x1490040a4] = 109093 [POISON]
+[8][0x1490040a8] = 109093 [POISON]
+[9][0x1490040ac] = 109093 [POISON]
+[10][0x1490040b0] = 109093 [POISON]
+[11][0x1490040b4] = 109093 [POISON]
+[12][0x1490040b8] = 109093 [POISON]
+[13][0x1490040bc] = 109093 [POISON]
+[14][0x1490040c0] = 109093 [POISON]
+[15][0x1490040c4] = 109093 [POISON]
+[canary][0x1490040c8] = 707
+CANARY      = 808
+

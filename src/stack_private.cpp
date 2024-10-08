@@ -14,7 +14,8 @@ stack* create_stack_pointer()
     return st;
 }
 
-int stack_private_ctor(stack* stack, int capacity, size_t line, const char* file)
+int stack_private_ctor(stack* stack, int capacity, const char* file,
+                       size_t line, const char* name)
 {
     check_expression(stack != NULL, POINTER_IS_NULL);
 
@@ -23,11 +24,11 @@ int stack_private_ctor(stack* stack, int capacity, size_t line, const char* file
     warning(stack->information != NULL, CALLOC_ERROR);
 
     *(stack->information)               = {};
-    stack->information->stack_name      = getname(stack);
+    stack->information->stack_name      = name;
     stack->information->stack_born_line = line;
     stack->information->stack_born_file = file;
 
-    stack_ctor(stack, capacity);
+    stack_ctor(stack, capacity, file, line, name);
 
     return 0;
 }

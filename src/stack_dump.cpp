@@ -33,7 +33,7 @@ int stack_dump(stack* stack)
     fprintf(dumb_file, "size        = %d\n", stack->size);
     fprintf(dumb_file, "error       = %d\n", stack->error);
 
-    fprintf(dumb_file, "CANARY      = %llu\n", stack->left_canary); //DEBUG
+    fprintf(dumb_file, "CANARY      = %d\n", stack->left_canary); //DEBUG
 
     fprintf(dumb_file, "[canary][%p] = %d\n", &stack->data_with_canaries[0],
             stack->data_with_canaries[0]); //DEBUG
@@ -57,7 +57,7 @@ int stack_dump(stack* stack)
             &(stack->data_with_canaries[CANARY_SIZE + stack->capacity]),
             stack->data_with_canaries[CANARY_SIZE + stack->capacity]); //DEBUG
 
-    fprintf(dumb_file, "CANARY      = %llu\n", stack->right_canary); //DEBUG
+    fprintf(dumb_file, "CANARY      = %d\n", stack->right_canary); //DEBUG
 
     fprintf(dumb_file, "\n");
 

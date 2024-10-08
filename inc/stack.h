@@ -19,7 +19,7 @@ struct stack_info
 
 struct stack
 {
-    uint64_t     left_canary; //DEBUG
+    stack_elem   left_canary; //DEBUG
     stack_info*  information;
     stack_elem*  data_with_canaries;//DEBUG
     const char*  dump_file_name;
@@ -28,10 +28,11 @@ struct stack
     int          capacity;
     stack_errors initialized = STACK_DID_NOT_INITIALIZED;
     int          error = NO_ERRORS;//DEBUG
-    uint64_t     right_canary; //DEBUG
+    stack_elem   right_canary; //DEBUG
 };
 
-int stack_ctor     (stack* stack, int capacity);
+int stack_ctor     (stack* stack, int capacity, const char* file,
+                    size_t line, const char* name);
 int stack_dump     (stack* stack);
 int set_dump_file  (stack *stack);
 #endif

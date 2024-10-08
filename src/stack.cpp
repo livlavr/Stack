@@ -90,7 +90,8 @@ int set_dump_file(stack *stack)
     return 0;
 }
 
-int stack_ctor(stack* stack, int capacity)
+int stack_ctor(stack* stack, int capacity, const char* file,
+               size_t line, const char* name)
 {
     set_dump_file(stack);
 
@@ -115,7 +116,7 @@ int stack_ctor(stack* stack, int capacity)
     stack->initialized = STACK_INITIALIZED;
     stack->error       = NO_ERRORS;
 
-    stack_private_dump(stack, __LINE__, __FILE__, __PRETTY_FUNCTION__);
+    stack_private_dump(stack, line, file, __func__);
 
     check_expression(!stack_ok(stack, __func__), "STACK_CTOR" && !OK);
 
@@ -131,7 +132,7 @@ int stack_push(stack* stack, stack_elem value, const char* file, size_t line)
     stack->data[stack->size] = value;
     stack->size++;
 
-    stack_private_dump(stack, line, file, __PRETTY_FUNCTION__);
+    stack_private_dump(stack, line, file, __func__);
 
     check_expression(!stack_ok(stack, __func__), "STACK_PUSH" && !OK);
 
@@ -148,20 +149,22 @@ int stack_pop(stack* stack, stack_elem* value, const char* file, size_t line)
     stack->data[stack->size - 1] = POISON; //DEBUG
     stack->size--;
 
-    stack_private_dump(stack, line, file, __PRETTY_FUNCTION__); //TODO switch line and file
+    stack_private_dump(stack, line, file, __func__); //TODO switch line and file
 
     check_expression(!stack_ok(stack, "stack_pop_end"), ("STACK_POP" && !OK));
 
     return 0;
 }
 
-int stack_dtor(stack* stack)
+int stack_dtor (stack* stack, const char* file, size_t line)
 {
     check_expression(!stack_ok(stack, __func__), "STACK_DTOR" && !OK);
 
-    stack->size     = 0;
-    stack->capacity = 0;
+    free(stack->information);
     free(stack->data_with_canaries);
+    stack->information = NULL;
+    stack->dump_file_name = NULL;
+    stack->data_with_canaries = NULL;
     stack->data = NULL;
 
     return 0;
