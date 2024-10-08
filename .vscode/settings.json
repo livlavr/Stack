@@ -1,5 +1,16 @@
 {
     "files.associations": {
-        "stack": "cpp"
+        "stack": "cpp",
+        "__bit_reference": "cpp",
+        "__node_handle": "cpp",
+        "bitset": "cpp",
+        "deque": "cpp",
+        "__memory": "cpp",
+        "limits": "cpp",
+        "locale": "cpp",
+        "optional": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "vector": "cpp"
     }
 }

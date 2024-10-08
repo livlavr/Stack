@@ -1,0 +1,47 @@
+stack stack[0x126605f00] at src/stack.cpp : 118 : int stack_ctor(stack*, int) born at src/main.cpp : 14
+initialized = 2
+capacity    = 10
+size        = 0
+error       = 0
+CANARY      = 808
+[canary][0x1266068d0] = 707
+[0][0x1266068d8] = 109093 [POISON]
+[1][0x1266068dc] = 109093 [POISON]
+[2][0x1266068e0] = 109093 [POISON]
+[3][0x1266068e4] = 109093 [POISON]
+[4][0x1266068e8] = 109093 [POISON]
+[5][0x1266068ec] = 109093 [POISON]
+[6][0x1266068f0] = 109093 [POISON]
+[7][0x1266068f4] = 109093 [POISON]
+[8][0x1266068f8] = 109093 [POISON]
+[9][0x1266068fc] = 109093 [POISON]
+[canary][0x126606900] = 707
+CANARY      = 808
+
+stack stack[0x126605f00] at src/main.cpp : 16 : int stack_push(stack*, stack_elem, const char*, size_t) born at src/main.cpp : 14
+initialized = 2
+capacity    = 5
+size        = 1
+error       = 0
+CANARY      = 808
+[canary][0x1266068d0] = 707
+*[0][0x1266068d8] = 1
+[1][0x1266068dc] = 109093 [POISON]
+[2][0x1266068e0] = 109093 [POISON]
+[3][0x1266068e4] = 109093 [POISON]
+[4][0x1266068e8] = 109093 [POISON]
+[canary][0x1266068ec] = 707
+CANARY      = 808
+
+stack stack[0x126605f00] at src/main.cpp : 17 : int stack_push(stack*, stack_elem, const char*, size_t) born at src/main.cpp : 14
+initialized = 2
+capacity    = 2
+size        = 2
+error       = 0
+CANARY      = 808
+[canary][0x1266068d0] = 707
+*[0][0x1266068d8] = 1
+*[1][0x1266068dc] = 2
+[canary][0x1266068e0] = 707
+CANARY      = 808
+

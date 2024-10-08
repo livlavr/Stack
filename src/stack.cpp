@@ -122,7 +122,7 @@ int stack_ctor(stack* stack, int capacity)
     return 0;
 }
 
-int stack_push(stack* stack, int value)
+int stack_push(stack* stack, stack_elem value, const char* file, size_t line)
 {
     check_expression(!stack_ok(stack, __func__), "STACK_PUSH" && !OK);
 
@@ -131,14 +131,14 @@ int stack_push(stack* stack, int value)
     stack->data[stack->size] = value;
     stack->size++;
 
-    stack_private_dump(stack, __LINE__, __FILE__, __PRETTY_FUNCTION__);
+    stack_private_dump(stack, line, file, __PRETTY_FUNCTION__);
 
     check_expression(!stack_ok(stack, __func__), "STACK_PUSH" && !OK);
 
     return 0;
 }
 
-int stack_pop(stack* stack, stack_elem* value)
+int stack_pop(stack* stack, stack_elem* value, const char* file, size_t line)
 {
     check_expression(!stack_ok(stack, __func__), ("STACK_POP" && !OK));
 
@@ -148,7 +148,7 @@ int stack_pop(stack* stack, stack_elem* value)
     stack->data[stack->size - 1] = POISON; //DEBUG
     stack->size--;
 
-    stack_private_dump(stack, __LINE__, __FILE__, __PRETTY_FUNCTION__);
+    stack_private_dump(stack, line, file, __PRETTY_FUNCTION__); //TODO switch line and file
 
     check_expression(!stack_ok(stack, "stack_pop_end"), ("STACK_POP" && !OK));
 

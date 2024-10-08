@@ -57,7 +57,6 @@ void binary_code_output(int error);
     DESCR_(STACK_STRUCT_BAD_RIGHT_CANARY, big_error);     \
     DESCR_(STACK_BAD_LEFT_CANARY, big_error);             \
     DESCR_(STACK_BAD_RIGHT_CANARY, big_error);            \
-    printf("\n")
 
 #define CANARY_SIZE (int)(sizeof(uint64_t) / sizeof(stack_elem))//DEBUG
 
