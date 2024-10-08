@@ -1,7 +1,7 @@
 #ifndef STACK_SECURITY_H_
 #define STACK_SECURITY_H_
 
-#include "stack_private.h"
+#include "stack_public.h"
 #include "stack_consts.h"
 #include "color_print.h"
 
@@ -58,5 +58,17 @@ void binary_code_output(int error);
     DESCR_(STACK_BAD_RIGHT_CANARY, big_error);            \
 
 #define CANARY_SIZE (int)(sizeof(stack_elem) / sizeof(stack_elem))//DEBUG
+
+#define stack_public(condition, message, file, line) do                              \
+{                                                                            \
+    int condition_return = condition;                                            \
+    if (!(condition_return))                                                        \
+    {                                                                        \
+        color_print(YELLOW_TEXT, BOLD, "ERROR %s : %s, file: %s, function: %s, line: %d\n", #condition, \
+        #message, file, __FUNCTION__, line);                                   \
+        printf("\n");\
+        return message;                                                       \
+    }                                                                        \
+} while(0)
 
 #endif

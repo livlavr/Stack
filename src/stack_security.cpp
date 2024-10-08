@@ -5,7 +5,7 @@
 
 #include "stack_security.h"
 #include "stack_consts.h"
-#include "stack_private.h"
+#include "stack_public.h"
 #include "stack.h"
 #include "debug_macros.h"
 #include "color_print.h"

@@ -5,22 +5,19 @@
 #include <cstring>
 #include <ctime>
 
-#include "stack_private.h"
-#include "stack.h"
-#include "recalloc.h"
-#include "debug_macros.h"
 #include "check_expression.h"
-#include "stack_consts.h"
 #include "stack_security.h"
+#include "stack_public.h"
+#include "debug_macros.h"
+#include "stack_consts.h"
+#include "recalloc.h"
+#include "stack.h"
 
-static int stack_resize(stack* stack_pointer, int new_size);
-static inline void stack_change_capacity(stack* stack_pointer);
-
-static int stack_resize(stack* stack_pointer, int new_size)
+static int stack_resize(stack* stack_pointer, int new_size, const char* file, size_t line)
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    check_expression(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK);
+    stack_public(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
 
     if(stack_pointer->capacity < new_size)
     {
@@ -51,21 +48,24 @@ static int stack_resize(stack* stack_pointer, int new_size)
         stack_pointer->data_with_canaries[stack_pointer->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
     }
 
-    check_expression(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK);
+    stack_public(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
 
     return 0;
 }
 
-static inline void stack_change_capacity(stack* stack_pointer)
+static inline void stack_resize_down(stack* stack_pointer, const char* file, size_t line)
+{
+    if (stack_pointer->size * 4 <= stack_pointer->capacity)
+    {
+        stack_resize(stack_pointer, (int)ceil(stack_pointer->capacity / 2), file, line);
+    }
+}
+
+static inline void stack_resize_up(stack* stack_pointer, const char* file, size_t line)
 {
     if(stack_pointer->size == stack_pointer->capacity)
     {
-        stack_resize(stack_pointer, stack_pointer->capacity * 2);
-    }
-    if (stack_pointer->size * 4 <= stack_pointer->capacity)
-    {
-        stack_resize(stack_pointer, (int)ceil(stack_pointer->capacity / 2));
-        //TODO If push and pop recently inited stack capacity will become less then user asked. Is it ok?
+        stack_resize(stack_pointer, stack_pointer->capacity * 2, file, line);
     }
 }
 
@@ -92,8 +92,7 @@ int set_dump_file(stack *stack_pointer)
     return 0;
 }
 
-int stack_ctor(stack* stack_pointer, int capacity, const char* file,
-               size_t line, const char* name)
+int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line)
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
@@ -122,9 +121,9 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file,
     stack_pointer->initialized = STACK_INITIALIZED;
     stack_pointer->error       = NO_ERRORS;
 
-    stack_private_dump(stack_pointer, line, file, __func__);
+    stack_public_dump(stack_pointer, file, line, __func__);
 
-    check_expression(!stack_ok(stack_pointer), "STACK_CTOR" && !OK);
+    stack_public(!stack_ok(stack_pointer), "STACK_CTOR" && !OK, file, line);
 
     return 0;
 }
@@ -133,16 +132,16 @@ int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t 
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    check_expression(!stack_ok(stack_pointer), "STACK_PUSH" && !OK);
+    stack_public(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
 
-    stack_change_capacity(stack_pointer);
+    stack_resize_up(stack_pointer, file, line);
 
     stack_pointer->data[stack_pointer->size] = value;
     stack_pointer->size++;
 
-    stack_private_dump(stack_pointer, line, file, __func__);
+    stack_public_dump(stack_pointer, file, line, __func__);
 
-    check_expression(!stack_ok(stack_pointer), "STACK_PUSH" && !OK);
+    stack_public(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
 
     return 0;
 }
@@ -151,24 +150,24 @@ int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t 
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    check_expression(!stack_ok(stack_pointer), ("STACK_POP" && !OK));
+    stack_public(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
 
     if(stack_pointer->size == 0)
     {
         stack_pointer->error += STACK_UNDERFLOW;
 
-        check_expression(!stack_err_error(stack_pointer->error), ("STACK_POP" && !OK));
+        stack_public(!stack_err_error(stack_pointer->error), ("STACK_POP" && !OK), file, line);
     }
 
-    stack_change_capacity(stack_pointer);
+    stack_resize_down(stack_pointer, file, line);
 
     *value = stack_pointer->data[stack_pointer->size - 1];
     stack_pointer->data[stack_pointer->size - 1] = POISON; //DEBUG
     stack_pointer->size--;
 
-    stack_private_dump(stack_pointer, line, file, __func__); //TODO switch line and file
+    stack_public_dump(stack_pointer, file, line, __func__);
 
-    check_expression(!stack_ok(stack_pointer), ("STACK_POP" && !OK));
+    stack_public(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
 
     return 0;
 }
@@ -177,7 +176,7 @@ int stack_dtor (stack* stack_pointer, const char* file, size_t line)
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    check_expression(!stack_ok(stack_pointer), "STACK_DTOR" && !OK);
+    stack_public(!stack_ok(stack_pointer), "STACK_DTOR" && !OK, file, line);
 
     free(stack_pointer->information);
     free(stack_pointer->data_with_canaries);

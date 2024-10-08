@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-#include "stack_private.h"
+#include "stack_public.h"
 #include "stack_consts.h"
 #include "stack_security.h"
 
@@ -32,7 +32,7 @@ struct stack
 };
 
 int stack_ctor     (stack* stack, int capacity, const char* file,
-                    size_t line, const char* name);
+                    size_t line);
 int stack_dump     (stack* stack);
 int set_dump_file  (stack *stack);
 #endif

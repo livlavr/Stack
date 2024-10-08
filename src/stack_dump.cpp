@@ -10,6 +10,8 @@ int stack_dump(stack* stack)
 {
     check_expression(stack != NULL, POINTER_IS_NULL);
 
+    // stack_public(!stack_ok(stack), "STACK_DUMP" && !OK, file, line); //TODO
+
     FILE* dumb_file = fopen(stack->dump_file_name, "a"); //TODO how could i make dump.txt in certain dir?
 
     if (dumb_file == NULL)

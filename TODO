@@ -18,6 +18,7 @@
 [x] I (dir) - чтобы разделить .h в другую папку
 [x] asserts in dumb
 [] make dir dumps if its doesnt exist
+[] TODO-s
 [x] stack null
 [x] dump пиздец
 [x] пофиксить вывод имени стэка в dump
@@ -39,6 +40,7 @@
 [] asserts doesnt turn down when ndebug mode
 [] stackok before dump
 [] ull <- int
+[] stack cant become less then user asked
 [] sanitizer проеб памяти
 free stack information
 free if check_expression

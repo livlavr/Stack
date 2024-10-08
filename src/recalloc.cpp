@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "stack_private.h"
+#include "stack_public.h"
 #include "stack.h"
 #include "recalloc.h"
 #include "debug_macros.h"

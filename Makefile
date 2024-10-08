@@ -1,6 +1,6 @@
 CXX          = gcc-14
 
-SRC          = main.cpp stack.cpp recalloc.cpp stack_dump.cpp stack_private.cpp stack_security.cpp color_print.cpp
+SRC          = main.cpp stack.cpp recalloc.cpp stack_dump.cpp stack_public.cpp stack_security.cpp color_print.cpp
 
 BUILD_DIR    = ./build/
 SRC_DIR      = ./src/
