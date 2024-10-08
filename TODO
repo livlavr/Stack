@@ -11,35 +11,33 @@
 [x] незначащие нули
 [x] check null pointers - MORE ASSERTS
 [x] ERROR name
-[] хавать название файла для вывода dump
+[x] хавать название файла для вывода dump
 [] stackOK не абортит программу
 [] repare dump - seg fault if dump not init stack
-[] user can input a file output name
+[x] user can input a file output name
 [] I (dir) - чтобы разделить .h в другую папку
-[] asserts in dumb
+[x] asserts in dumb
 [] make dir dumps if its doesnt exist
-[] stack null
-[] dump пиздец
+[x] stack null
+[x] dump пиздец
 [] пофиксить вывод имени стэка в dump
-[] enum с побитовыми
+[x] enum с побитовыми
 [] раскидать stackok по функциям
 [] say
-[] message
-[] option is need to allow stack_ctor make a different dump_file for every stack
-[] верификатор проверяет error на ошибку и если что вносит туда новую
+[x] message
+[x] верификатор проверяет error на ошибку и если что вносит туда новую
 [] стэк ресайз проверяет нужно ресайзить или нет(? хз)
 [] ресайз ап и ресайз даун
 [] макросы чтобы определять где упал стэк, но юзер
 может вызвать функцию и отправить туда null null null
 [] dump должен учитывать тип stack_elem
-[] stack_err_error long int
+[x] stack_err_error long int
 [] нормальные канарейки
 [] asserts doesnt turn down when ndebug mode
 [] stackok before dump
-[] поменять long int
 [] ull <- int
 [] sanitizer проеб памяти
-free stak information
+free stack information
 free if check_expression
 free в месте окончания программы
 [] глобальная переменная
@@ -48,10 +46,8 @@ free в месте окончания программы
 [] colorful stackok
 [] ondebug
 [] прописать vscode, build и мб еще что-то в gitignore
-[] как нормально реализовать stack_dump, чтобы он не стирал
+[x] как нормально реализовать stack_dump, чтобы он не стирал
 к хуям собачим файл при инициализации второго стэка с таким же dump_file?
 [] gitsub - check_expression, recalloc
 [] How can I defence not stack pointer?
-[] null check
 [] Hash
-[] Папка dumps должна создаваться автоматически

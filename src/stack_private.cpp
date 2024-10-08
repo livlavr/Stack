@@ -33,7 +33,7 @@ int stack_private_ctor(stack* stack, int capacity, size_t line, const char* file
 }
 
 int stack_private_dump(stack* stack, size_t line,
-                                        const char* file, const char* function)
+                       const char* file, const char* function)
 {
     check_expression(stack != NULL, POINTER_IS_NULL);
 
