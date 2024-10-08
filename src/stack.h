@@ -22,6 +22,7 @@ struct stack
     uint64_t     left_canary; //DEBUG
     stack_info*  information;
     stack_elem*  data_with_canaries;//DEBUG
+    const char*  dump_file_name;
     stack_elem*  data;
     int          size;
     int          capacity;
@@ -32,4 +33,5 @@ struct stack
 
 int stack_ctor     (stack* stack, int capacity);
 int stack_dump     (stack* stack);
+int set_dump_file  (stack *stack);
 #endif

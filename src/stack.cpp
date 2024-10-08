@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <cstring>
+#include <ctime>
 
 #include "stack_private.h"
 #include "stack.h"
@@ -21,6 +23,9 @@ static int stack_resize(stack* stack, int new_size) //TODO DO_NOT_CALL_ME
     {
         stack->data_with_canaries = (stack_elem*)recalloc(stack->data_with_canaries, (size_t)(stack->capacity + 2 * CANARY_SIZE),
                        (size_t)(new_size + 2 * CANARY_SIZE), sizeof(stack_elem));//DEBUG
+
+        warning(stack->data_with_canaries != NULL, CALLOC_ERROR);
+
         stack->data = stack->data_with_canaries + CANARY_SIZE;//DEBUG CANARY_SIZE
 
         stack->capacity = new_size;
@@ -48,14 +53,42 @@ static int stack_resize(stack* stack, int new_size) //TODO DO_NOT_CALL_ME
     return 0;
 }
 
+int set_dump_file(stack *stack)
+{
+    check_expression(stack != NULL, POINTER_IS_NULL);
+
+    char *buffer            = (char *)calloc(SIZE_OF_BUFFER, sizeof(char));
+
+    warning(buffer != NULL, CALLOC_ERROR);
+
+    const time_t timer      = time(NULL);
+    tm *now                 = localtime(&timer);
+    const char *time   = asctime(now);
+    size_t time_char_length = strlen(time) - 1;
+    const char *folder_name = "dumps/";
+
+    strcpy(buffer, folder_name);
+    strncpy(buffer + strlen(folder_name), time, time_char_length);
+    strcat(buffer, ".txt");
+
+    stack->dump_file_name   = buffer;
+
+    return 0;
+}
+
 int stack_ctor(stack* stack, int capacity)
 {
+    set_dump_file(stack);
+
     stack->left_canary  = STRUCT_STACK_CANARY;  //DEBUG
     stack->right_canary = STRUCT_STACK_CANARY; //DEBUG
 
     stack->size               = 0;
     stack->capacity           = capacity;
     stack->data_with_canaries = (stack_elem*)calloc((size_t)(capacity + 2 * CANARY_SIZE), sizeof(stack_elem)); //DEBUG CANARY_SIZE
+
+    warning(stack->data_with_canaries != NULL, CALLOC_ERROR);
+
     stack->data               = stack->data_with_canaries + CANARY_SIZE; //DEBUG
 
     stack->data_with_canaries[0]                      = STACK_CANARY;//DEBUG

@@ -1,0 +1,60 @@
+stack stack[0x13d704240] at src/stack.cpp : 98 : int stack_ctor(stack*, int) born at src/main.cpp : 14
+initialized = 2
+capacity    = 10
+size        = 0
+error       = 0
+CANARY      = 808
+[canary][0x13e804f00] = 707
+[0][0x13e804f08] = 109093 [POISON]
+[1][0x13e804f0c] = 109093 [POISON]
+[2][0x13e804f10] = 109093 [POISON]
+[3][0x13e804f14] = 109093 [POISON]
+[4][0x13e804f18] = 109093 [POISON]
+[5][0x13e804f1c] = 109093 [POISON]
+[6][0x13e804f20] = 109093 [POISON]
+[7][0x13e804f24] = 109093 [POISON]
+[8][0x13e804f28] = 109093 [POISON]
+[9][0x13e804f2c] = 109093 [POISON]
+[canary][0x13e804f30] = 707
+CANARY      = 808
+
+stack stack[0x13d704240] at src/stack.cpp : 117 : int stack_push(stack*, int) born at src/main.cpp : 14
+initialized = 2
+capacity    = 10
+size        = 1
+error       = 0
+CANARY      = 808
+[canary][0x13e804f00] = 707
+*[0][0x13e804f08] = 1
+[1][0x13e804f0c] = 109093 [POISON]
+[2][0x13e804f10] = 109093 [POISON]
+[3][0x13e804f14] = 109093 [POISON]
+[4][0x13e804f18] = 109093 [POISON]
+[5][0x13e804f1c] = 109093 [POISON]
+[6][0x13e804f20] = 109093 [POISON]
+[7][0x13e804f24] = 109093 [POISON]
+[8][0x13e804f28] = 109093 [POISON]
+[9][0x13e804f2c] = 109093 [POISON]
+[canary][0x13e804f30] = 707
+CANARY      = 808
+
+stack stack[0x13d704240] at src/stack.cpp : 117 : int stack_push(stack*, int) born at src/main.cpp : 14
+initialized = 2
+capacity    = 10
+size        = 2
+error       = 0
+CANARY      = 808
+[canary][0x13e804f00] = 707
+*[0][0x13e804f08] = 1
+*[1][0x13e804f0c] = 2
+[2][0x13e804f10] = 109093 [POISON]
+[3][0x13e804f14] = 109093 [POISON]
+[4][0x13e804f18] = 109093 [POISON]
+[5][0x13e804f1c] = 109093 [POISON]
+[6][0x13e804f20] = 109093 [POISON]
+[7][0x13e804f24] = 109093 [POISON]
+[8][0x13e804f28] = 109093 [POISON]
+[9][0x13e804f2c] = 109093 [POISON]
+[canary][0x13e804f30] = 707
+CANARY      = 808
+

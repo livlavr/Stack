@@ -10,8 +10,6 @@
 
 int main() //TODO how to do MakeF see when .h is updated?
 {
-    stack_dump_file_cleaning();
-
     stack* st = create_stack_pointer();
     stack_private_ctor(st, 10, __LINE__, __FILE__);
     int x = 0;

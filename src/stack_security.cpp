@@ -24,7 +24,7 @@ void binary_code_output(int error)
 
 int stack_err_error(int error)
 {
-    color_print(RED_TEXT, BOLD, "YOUR ERROR CODE:");
+    color_print(RED_TEXT, BOLD, "YOUR ERROR CODE: ");
     binary_code_output(error);
     printf("\n");
     DESCRIPTION_OF_ERRORS(error);
@@ -34,6 +34,7 @@ int stack_err_error(int error)
 
 int stack_ok(stack* stack, const char* function) //TODO valid test //check stack error in the beginning
 {
+    //TODO check null stack
     if(stack->error != 0)
     {
         return stack_err_error(stack->error);

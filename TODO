@@ -9,13 +9,15 @@
 [x] canary protection & stack protection
 [x] static functions
 [x] незначащие нули
-[] check null pointers - MORE ASSERTS
+[x] check null pointers - MORE ASSERTS
 [x] ERROR name
 [] хавать название файла для вывода dump
+[] stackOK не абортит программу
 [] repare dump - seg fault if dump not init stack
 [] user can input a file output name
 [] I (dir) - чтобы разделить .h в другую папку
 [] asserts in dumb
+[] make dir dumps if its doesnt exist
 [] stack null
 [] dump пиздец
 [] пофиксить вывод имени стэка в dump
@@ -52,3 +54,4 @@ free в месте окончания программы
 [] How can I defence not stack pointer?
 [] null check
 [] Hash
+[] Папка dumps должна создаваться автоматически

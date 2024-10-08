@@ -4,30 +4,19 @@
 #include "debug_macros.h"
 #include "stack_consts.h"
 #include "stack_security.h"
-
-int stack_dump_file_cleaning()
-{
-    FILE* dumb_file = fopen("dump.txt", "w");
-
-    if (dumb_file == NULL)
-    {
-        printf("CAN'T FIND A \"dump.txt\" FILE\n");
-
-        return FILE_OPENING_ERROR;
-    }
-
-    fclose(dumb_file);
-
-    return 0;
-}
+#include "check_expression.h"
 
 int stack_dump(stack* stack)
 {
-    FILE* dumb_file = fopen("dump.txt", "a"); //TODO how could i make dump.txt in certain dir?
+    check_expression(stack != NULL, POINTER_IS_NULL);
+
+    FILE* dumb_file = fopen(stack->dump_file_name, "a"); //TODO how could i make dump.txt in certain dir?
 
     if (dumb_file == NULL)
     {
-        printf("CAN'T FIND A \"dump.txt\" FILE\n");
+        printf("CAN'T FIND A \"");
+        printf("%s", stack->dump_file_name);
+        printf("\" FILE\n");
 
         return FILE_OPENING_ERROR;
     }

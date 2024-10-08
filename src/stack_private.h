@@ -13,7 +13,6 @@ int stack_pop      (stack* stack, stack_elem* value);
 int stack_private_dump(stack* stack, size_t line,
                                         const char* file, const char* function);
 int stack_dtor     (stack* stack);
-int stack_dump_file_cleaning();
 
 #define getname(a) #a
 

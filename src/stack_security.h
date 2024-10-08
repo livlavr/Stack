@@ -36,7 +36,7 @@ void binary_code_output(int error);
 #define DESCR_(error, big_error) \
     if ((big_error / error & 1) == 1)\
     {\
-        color_print(RED_TEXT, BOLD, #error);\
+        color_print(RED_TEXT, BOLD, #error " ");\
     }\
     else\
     {\
