@@ -19,7 +19,7 @@ stack* create_stack_pointer()
 int stack_public_ctor(stack* stack, int capacity, const char* file,
                        size_t line, const char* name)
 {
-    check_expression(stack != NULL, POINTER_IS_NULL);
+    check_expression(stack   != NULL, POINTER_IS_NULL);
     check_expression(capacity > 0, STACK_BAD_CAPACITY);
 
     stack->information = (stack_info*)calloc(1, sizeof(stack_info));
@@ -40,13 +40,13 @@ int stack_public_dump(stack* stack, const char* file, size_t line, const char* f
 {
     check_expression(stack != NULL, POINTER_IS_NULL);
 
-    // stack_public(!stack_ok(stack), "STACK_DUMP" && !OK, file, line);
+    // stack_check(!stack_ok(stack), "STACK_DUMP" && !OK, file, line);
 
     stack->information->stack_last_usage_line     = line;
     stack->information->stack_last_usage_file     = file;
     stack->information->stack_last_usage_function = function;
 
-    stack_dump(stack);
+    stack_private_dump(stack);
 
     return 0;
 }

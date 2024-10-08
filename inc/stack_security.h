@@ -59,7 +59,7 @@ void binary_code_output(int error);
 
 #define CANARY_SIZE (int)(sizeof(stack_elem) / sizeof(stack_elem))//DEBUG
 
-#define stack_public(condition, message, file, line) do                              \
+#define stack_check(condition, message, file, line) do                              \
 {                                                                            \
     int condition_return = condition;                                            \
     if (!(condition_return))                                                        \

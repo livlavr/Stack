@@ -13,7 +13,7 @@
 [x] ERROR name
 [x] хавать название файла для вывода dump
 [x] stackOK не абортит программу
-[] repare dump - seg fault if dump not init stack
+[x] repair dump - seg fault if dump not init stack
 [x] user can input a file output name
 [x] I (dir) - чтобы разделить .h в другую папку
 [x] asserts in dumb
@@ -23,9 +23,9 @@
 [x] dump пиздец
 [x] пофиксить вывод имени стэка в dump
 [x] enum с побитовыми
-[] раскидать stackok по функциям
+[x] раскидать stackok по функциям
 [] say
-[] renaming
+[x] renaming
 [x] message
 [x] верификатор проверяет error на ошибку и если что вносит туда новую
 [x] стэк ресайз проверяет нужно ресайзить или нет(? хз)
@@ -34,18 +34,18 @@
 [x] макросы чтобы определять где упал стэк, но юзер
 может вызвать функцию и отправить туда null null null
 [] dump должен учитывать тип stack_elem
-[] stackOK зануляет параметр stack->error если не обнаружит ошибок
+[x] stackOK зануляет параметр stack->error если не обнаружит ошибок
 [x] stack_err_error long int
 [] нормальные канарейки
 [] asserts doesnt turn down when ndebug mode
-[] stackok before dump
+[x] stackok before dump
 [] ull <- int
 [] stack cant become less then user asked
 [] sanitizer проеб памяти
-free stack information
-free if check_expression
-free в месте окончания программы
-[] глобальная переменная
+   - free stack information
+   - free if check_expression
+   - free в месте окончания программы
+[] глобальная переменная для хранения индексов стэка
 [] double init stack stackerr
 [x] check_expression message
 [x] colorful stackok

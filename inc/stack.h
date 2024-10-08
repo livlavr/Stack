@@ -33,6 +33,6 @@ struct stack
 
 int stack_ctor     (stack* stack, int capacity, const char* file,
                     size_t line);
-int stack_dump     (stack* stack);
+int stack_private_dump     (stack* stack);
 int set_dump_file  (stack *stack);
 #endif

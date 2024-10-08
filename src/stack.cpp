@@ -17,7 +17,7 @@ static int stack_resize(stack* stack_pointer, int new_size, const char* file, si
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    stack_public(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
+    stack_check(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
 
     if(stack_pointer->capacity < new_size)
     {
@@ -48,7 +48,7 @@ static int stack_resize(stack* stack_pointer, int new_size, const char* file, si
         stack_pointer->data_with_canaries[stack_pointer->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
     }
 
-    stack_public(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
+    stack_check(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
 
     return 0;
 }
@@ -123,7 +123,7 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
 
     stack_public_dump(stack_pointer, file, line, __func__);
 
-    stack_public(!stack_ok(stack_pointer), "STACK_CTOR" && !OK, file, line);
+    stack_check(!stack_ok(stack_pointer), "STACK_CTOR" && !OK, file, line);
 
     return 0;
 }
@@ -132,7 +132,7 @@ int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t 
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    stack_public(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
+    stack_check(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
 
     stack_resize_up(stack_pointer, file, line);
 
@@ -141,7 +141,7 @@ int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t 
 
     stack_public_dump(stack_pointer, file, line, __func__);
 
-    stack_public(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
+    stack_check(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
 
     return 0;
 }
@@ -150,13 +150,13 @@ int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t 
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    stack_public(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
+    stack_check(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
 
     if(stack_pointer->size == 0)
     {
         stack_pointer->error += STACK_UNDERFLOW;
 
-        stack_public(!stack_err_error(stack_pointer->error), ("STACK_POP" && !OK), file, line);
+        stack_check(!stack_err_error(stack_pointer->error), ("STACK_POP" && !OK), file, line);
     }
 
     stack_resize_down(stack_pointer, file, line);
@@ -167,7 +167,7 @@ int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t 
 
     stack_public_dump(stack_pointer, file, line, __func__);
 
-    stack_public(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
+    stack_check(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
 
     return 0;
 }
@@ -176,7 +176,7 @@ int stack_dtor (stack* stack_pointer, const char* file, size_t line)
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    stack_public(!stack_ok(stack_pointer), "STACK_DTOR" && !OK, file, line);
+    stack_check(!stack_ok(stack_pointer), "STACK_DTOR" && !OK, file, line);
 
     free(stack_pointer->information);
     free(stack_pointer->data_with_canaries);

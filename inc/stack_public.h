@@ -30,7 +30,7 @@ int stack_dtor     (stack* stack, const char* file, size_t line);
 #define stack_destroy(stack_pointer)\
     stack_dtor(stack_pointer, __FILE__, __LINE__)
 
-#define $stack_dump(stack_pointer)\
+#define stack_dump(stack_pointer)\
     stack_public_dump(stack_pointer, __FILE__, __LINE__, __FUNCTION__)
 
 #endif
