@@ -14,6 +14,7 @@
 #include "stack_security.h"
 
 static int stack_resize(stack* stack, int new_size);
+static inline void stack_change_capacity(stack* stack);
 
 static int stack_resize(stack* stack, int new_size) //TODO DO_NOT_CALL_ME
 {
@@ -51,6 +52,19 @@ static int stack_resize(stack* stack, int new_size) //TODO DO_NOT_CALL_ME
     check_expression(!stack_ok(stack, __func__), "STACK_RESIZE" && !OK);
 
     return 0;
+}
+
+static inline void stack_change_capacity(stack* stack)
+{
+    if(stack->size == stack->capacity)
+    {
+        stack_resize(stack, stack->capacity * 2);
+    }
+    if (stack->size * 4 <= stack->capacity)
+    {
+        stack_resize(stack, (int)ceil(stack->capacity / 2));
+        //TODO If push and pop recently inited stack capacity will become less then user asked. Is it ok?
+    }
 }
 
 int set_dump_file(stack *stack)
@@ -112,10 +126,7 @@ int stack_push(stack* stack, int value)
 {
     check_expression(!stack_ok(stack, __func__), "STACK_PUSH" && !OK);
 
-    if(stack->size == stack->capacity)
-    {
-        stack_resize(stack, stack->capacity * 2);
-    }
+    stack_change_capacity(stack);
 
     stack->data[stack->size] = value;
     stack->size++;
@@ -131,11 +142,7 @@ int stack_pop(stack* stack, stack_elem* value)
 {
     check_expression(!stack_ok(stack, __func__), ("STACK_POP" && !OK));
 
-    if (stack->size * 4 <= stack->capacity)
-    {
-        stack_resize(stack, (int)ceil(stack->capacity / 2));
-        //TODO If push and pop recently inited stack capacity will become less then user asked. Is it ok?
-    }
+    stack_change_capacity(stack);
 
     *value = stack->data[stack->size - 1];
     stack->data[stack->size - 1] = POISON; //DEBUG

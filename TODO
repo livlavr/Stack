@@ -12,10 +12,10 @@
 [x] check null pointers - MORE ASSERTS
 [x] ERROR name
 [x] хавать название файла для вывода dump
-[] stackOK не абортит программу
+[x] stackOK не абортит программу
 [] repare dump - seg fault if dump not init stack
 [x] user can input a file output name
-[] I (dir) - чтобы разделить .h в другую папку
+[x] I (dir) - чтобы разделить .h в другую папку
 [x] asserts in dumb
 [] make dir dumps if its doesnt exist
 [x] stack null
@@ -24,14 +24,16 @@
 [x] enum с побитовыми
 [] раскидать stackok по функциям
 [] say
+[] renaming
 [x] message
 [x] верификатор проверяет error на ошибку и если что вносит туда новую
-[] стэк ресайз проверяет нужно ресайзить или нет(? хз)
-[] ресайз ап и ресайз даун
+[x] стэк ресайз проверяет нужно ресайзить или нет(? хз)
+[x] ресайз ап и ресайз даун
 [] NDEBUG in makefile?
 [] макросы чтобы определять где упал стэк, но юзер
 может вызвать функцию и отправить туда null null null
 [] dump должен учитывать тип stack_elem
+[] stackOK зануляет параметр stack->error если не обнаружит ошибок
 [x] stack_err_error long int
 [] нормальные канарейки
 [] asserts doesnt turn down when ndebug mode

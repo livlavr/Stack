@@ -6,9 +6,9 @@
 #include "debug_macros.h"
 #include "recalloc.h"
 
-#include "stack.h"
+#include "stack.h" //TODO delete
 
-int main() //TODO how to do MakeF see when .h is updated?
+int main()
 {
     stack* st = create_stack_pointer();
     stack_private_ctor(st, 10, __LINE__, __FILE__);
