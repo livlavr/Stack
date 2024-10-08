@@ -6,6 +6,8 @@
 #include "debug_macros.h"
 #include "recalloc.h"
 
+#include "stack.h"
+
 int main() //TODO how to do MakeF see when .h is updated?
 {
     stack_dump_file_cleaning();
@@ -15,6 +17,7 @@ int main() //TODO how to do MakeF see when .h is updated?
     int x = 0;
     stack_push(st, 1);
     stack_push(st, 2);
+    st->capacity = -10;
     stack_push(st, 3);
     stack_push(st, 4);
     stack_push(st, 1);

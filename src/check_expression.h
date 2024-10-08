@@ -1,6 +1,8 @@
 #ifndef CHECK_EXPRESSION_H_
 #define CHECK_EXPRESSION_H_
 
+#include <cstdlib>
+
 enum TYPE_OF_ERROR
 {
     POINTER_IS_NULL = 1,

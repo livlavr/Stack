@@ -7,31 +7,32 @@
 #include "stack_consts.h"
 #include "stack_private.h"
 #include "stack.h"
+#include "color_print.h"
 
-void binary_code_output(uint32_t error)
+void binary_code_output(int error)
 {
     if((error >> 1) != 0)
     {
         binary_code_output(error >> 1);
-        printf("%u", error % 2);
+        printf("%d", error % 2);
     }
     else
     {
-        printf("%u", error % 2);
+        printf("%d", error % 2);
     }
 }
 
-long int stack_err_error(long int error)
+int stack_err_error(int error)
 {
-    printf("YOUR ERROR CODE: ");
-    binary_code_output((uint32_t)error);
+    color_print(RED_TEXT, BOLD, "YOUR ERROR CODE:");
+    binary_code_output(error);
     printf("\n");
-    DESCRIPTION_OF_ERRORS;
+    DESCRIPTION_OF_ERRORS(error);
 
     return error;
 }
 
-long int stack_ok(stack* stack, const char* function) //TODO valid test //check stack error in the beginning
+int stack_ok(stack* stack, const char* function) //TODO valid test //check stack error in the beginning
 {
     if(stack->error != 0)
     {
@@ -94,7 +95,7 @@ long int stack_ok(stack* stack, const char* function) //TODO valid test //check 
     }
 }
 
-long int stack_ctor_ok(stack* stack)
+int stack_ctor_ok(stack* stack)
 {
     if(stack->error != 0)
     {

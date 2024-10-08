@@ -23,7 +23,8 @@ int stack_private_ctor(stack* stack, int capacity, size_t line, const char* file
     return 0;
 }
 
-int stack_private_dump(stack* stack, size_t line, const char* file, const char* function)
+int stack_private_dump(stack* stack, size_t line,
+                                        const char* file, const char* function)
 {
     stack->information->stack_last_usage_line     = line;
     stack->information->stack_last_usage_file     = file;

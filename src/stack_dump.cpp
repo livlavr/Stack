@@ -13,7 +13,7 @@ int stack_dump_file_cleaning()
     {
         printf("CAN'T FIND A \"dump.txt\" FILE\n");
 
-        return DUMP_FILE_OPENING_ERROR;
+        return FILE_OPENING_ERROR;
     }
 
     fclose(dumb_file);
@@ -29,7 +29,7 @@ int stack_dump(stack* stack)
     {
         printf("CAN'T FIND A \"dump.txt\" FILE\n");
 
-        return DUMP_FILE_OPENING_ERROR;
+        return FILE_OPENING_ERROR;
     }
 
     fprintf(dumb_file, "stack %s[%p] at %s : %lu : %s born at %s : %lu\n",
