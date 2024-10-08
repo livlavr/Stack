@@ -4,6 +4,7 @@ SRC          = main.cpp stack.cpp recalloc.cpp stack_dump.cpp stack_private.cpp 
 
 BUILD_DIR    = ./build/
 SRC_DIR      = ./src/
+CFLAGS       = -I inc
 
 TARGET       = stack.out
 OBJECT       = $(patsubst %.cpp, %.o, $(SRC))
@@ -43,10 +44,10 @@ $(BUILD_DIR) :
 	mkdir -p build
 
 $(OBJECT) : %.o : %.cpp
-	$(CXX) -c $^ -o $(addprefix $(BUILD_DIR), $@)
+	$(CXX) $(CFLAGS) -c $^ -o $(addprefix $(BUILD_DIR), $@)
 
 ded : $(addprefix $(SRC_DIR), $(SRC))
-	$(CXX) $^ -o $(TARGET) $(DED_FLAGS)
+	$(CXX) $(CFLAGS) $^ -o $(TARGET) $(DED_FLAGS)
 	@printf "$(YELLOW_TEXT)SKOLKO MOJNO BOJE MOY BLYAT'$(DEFAULT_TEXT)\n"
 
 flash:
