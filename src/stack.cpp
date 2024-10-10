@@ -48,6 +48,8 @@ static int stack_resize(stack* stack_pointer, int new_size, const char* file, si
         stack_pointer->data_with_canaries[stack_pointer->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
     }
 
+    stack_pointer->hash = hash(stack_pointer);
+
     stack_check(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
 
     return 0;
@@ -79,7 +81,7 @@ int set_dump_file(stack *stack_pointer)
 
     const time_t timer      = time(NULL);
     tm *now                 = localtime(&timer);
-    const char *time   = asctime(now);
+    const char *time        = asctime(now);
     size_t time_char_length = strlen(time) - 1;
     const char *folder_name = "dumps/";
 
@@ -121,6 +123,8 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
     stack_pointer->initialized = STACK_INITIALIZED;
     stack_pointer->error       = NO_ERRORS;
 
+    stack_pointer->hash = hash(stack_pointer);
+
     stack_public_dump(stack_pointer, file, line, __func__);
 
     stack_check(!stack_ok(stack_pointer), "STACK_CTOR" && !OK, file, line);
@@ -138,6 +142,8 @@ int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t 
 
     stack_pointer->data[stack_pointer->size] = value;
     stack_pointer->size++;
+
+    stack_pointer->hash = hash(stack_pointer);
 
     stack_public_dump(stack_pointer, file, line, __func__);
 
@@ -164,6 +170,8 @@ int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t 
     *value = stack_pointer->data[stack_pointer->size - 1];
     stack_pointer->data[stack_pointer->size - 1] = POISON; //DEBUG
     stack_pointer->size--;
+
+    stack_pointer->hash = hash(stack_pointer);
 
     stack_public_dump(stack_pointer, file, line, __func__);
 

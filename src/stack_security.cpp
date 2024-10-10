@@ -9,6 +9,7 @@
 #include "stack.h"
 #include "debug_macros.h"
 #include "color_print.h"
+#include "check_expression.h"
 
 void binary_code_output(int error)
 {
@@ -33,66 +34,103 @@ int stack_err_error(int error)
     return error;
 }
 
-int stack_ok(stack* stack) //TODO valid test //check stack error in the beginning
+int stack_ok(stack* stack_pointer) //TODO valid test //check stack error in the beginning
 {
+    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+
     int new_error_code = NO_ERRORS;
 
-    //TODO hash check
-
-    if(stack->initialized == STACK_DID_NOT_INITIALIZED)
+    if(stack_pointer->hash != hash(stack_pointer))
     {
-        new_error_code += STACK_DID_NOT_INITIALIZED;
-
-        stack->error = new_error_code;
-
-        return stack_err_error(stack->error);
+        $DEBUG("%llu", stack_pointer->hash);
+        $DEBUG("%llu", hash(stack_pointer));
+        $DEBUG("%llu", hash(stack_pointer));
+        new_error_code |= STACK_BAD_HASH;
     }
 
-    if(stack->capacity < stack->size)
+    if(stack_pointer->initialized == STACK_DID_NOT_INITIALIZED)
     {
-        new_error_code += STACK_OVERFLOW;
+        new_error_code |= STACK_DID_NOT_INITIALIZED;
+
+        stack_pointer->error = new_error_code;
+
+        return stack_err_error(stack_pointer->error);
     }
 
-    if(stack->capacity < 0)
+    if(stack_pointer->capacity < stack_pointer->size)
     {
-        new_error_code += STACK_BAD_CAPACITY;
+        new_error_code |= STACK_OVERFLOW;
     }
 
-    if(stack->size < 0)
+    if(stack_pointer->capacity < 0)
     {
-        new_error_code += STACK_BAD_SIZE;
+        new_error_code |= STACK_BAD_CAPACITY;
     }
 
-    if(stack->left_canary != STRUCT_STACK_CANARY)
+    if(stack_pointer->size < 0)
     {
-        new_error_code += STACK_STRUCT_BAD_LEFT_CANARY;
+        new_error_code |= STACK_BAD_SIZE;
     }
 
-    if(stack->right_canary != STRUCT_STACK_CANARY)
+    if(stack_pointer->left_canary != STRUCT_STACK_CANARY)
     {
-        new_error_code += STACK_STRUCT_BAD_RIGHT_CANARY;
+        new_error_code |= STACK_STRUCT_BAD_LEFT_CANARY;
     }
 
-    if(stack->data_with_canaries[0] != STACK_CANARY)
+    if(stack_pointer->right_canary != STRUCT_STACK_CANARY)
     {
-        new_error_code += STACK_BAD_LEFT_CANARY;
+        new_error_code |= STACK_STRUCT_BAD_RIGHT_CANARY;
     }
 
-    if(stack->data_with_canaries[CANARY_SIZE + stack->capacity] != STACK_CANARY)
+    if(stack_pointer->data_with_canaries[0] != STACK_CANARY)
     {
-        new_error_code += STACK_BAD_RIGHT_CANARY;
+        new_error_code |= STACK_BAD_LEFT_CANARY;
+    }
+
+    if(stack_pointer->data_with_canaries[CANARY_SIZE + stack_pointer->capacity] != STACK_CANARY)
+    {
+        new_error_code |= STACK_BAD_RIGHT_CANARY;
     }
 
     if(new_error_code == NO_ERRORS)
     {
-        stack->error = NO_ERRORS;
+        stack_pointer->error = NO_ERRORS;
 
         return NO_ERRORS;
     }
     else
     {
-        stack->error = new_error_code;
+        stack_pointer->error = new_error_code;
 
-        return stack_err_error(stack->error);
+        return stack_err_error(stack_pointer->error);
     }
+}
+
+uint64_t hash(stack *stack_pointer)
+{
+    check_expression(stack_pointer != NULL, STACK_POINTER_IS_NULL);
+
+    uint64_t hash = 5381;
+    int c = 0;
+
+    char* ptr = (char*)stack_pointer;
+    uint64_t right_canary_pointer = (uint64_t)&stack_pointer->right_canary;
+    uint64_t hash_pointer = (uint64_t)&stack_pointer->hash;
+    uint64_t size_of_hash = sizeof(uint64_t);
+    uint64_t size_of_int  = sizeof(int);
+
+    while ((uint64_t)ptr <= right_canary_pointer)
+    {
+        if((uint64_t)ptr <= hash_pointer - size_of_int || (uint64_t)ptr >= hash_pointer + size_of_hash)
+        {
+            c = *(int*)ptr++;
+            hash = ((hash << 5) + hash) + (uint64_t)c;
+        }
+        else
+        {
+            ptr++;
+        }
+    }
+
+    return hash;
 }

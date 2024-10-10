@@ -25,14 +25,15 @@ struct stack
     const char*  dump_file_name;
     stack_elem*  data;
     int          size;
+    uint64_t     hash;
     int          capacity;
     stack_errors initialized = STACK_DID_NOT_INITIALIZED;
     int          error       = NO_ERRORS;//DEBUG
     stack_elem   right_canary; //DEBUG
 };
 
-int stack_ctor     (stack* stack, int capacity, const char* file,
-                    size_t line);
-int stack_private_dump     (stack* stack);
-int set_dump_file  (stack *stack);
+int stack_ctor        (stack* stack_pointer, int capacity,
+                       const char* file, size_t line);
+int set_dump_file     (stack* stack_pointer);
+int stack_private_dump(stack* stack_pointer);
 #endif
