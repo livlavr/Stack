@@ -6,33 +6,28 @@
 #include "check_expression.h"
 #include "stack_security.h"
 
-stack* create_stack_pointer(const char* file, size_t line) // TODO move this into stack ctor
-{
-    stack* st = (stack*)calloc(1, sizeof(stack));
-
-    stack_check(st != NULL, NULL, file, line);
-
-    *st = {}; // TODO set only needed params
-
-    return st;
-}
-
-int stack_public_ctor(stack* stack_pointer, int capacity, const char* file,
+int stack_public_ctor(stack** stack_pointer, int capacity, const char* file,
                        size_t line, const char* name)
 {
-    check_expression(stack_pointer   != NULL, POINTER_IS_NULL);
     check_expression(capacity > 0, STACK_BAD_CAPACITY);
 
-    stack_pointer->information = (stack_info*)calloc(1, sizeof(stack_info));
+    *stack_pointer = (stack*)calloc(1, sizeof(stack));
 
-    warning(stack_pointer->information != NULL, CALLOC_ERROR);
+    warning(stack_pointer != NULL, CALLOC_ERROR);
 
-    *(stack_pointer->information)               = {};
-    stack_pointer->information->stack_name      = name;
-    stack_pointer->information->stack_born_line = line;
-    stack_pointer->information->stack_born_file = file;
+    (*stack_pointer)->error       = NO_ERRORS;
+    (*stack_pointer)->initialized = STACK_DID_NOT_INITIALIZED;
 
-    stack_ctor(stack_pointer, capacity, file, line);
+    (*stack_pointer)->information = (stack_info*)calloc(1, sizeof(stack_info));
+
+    warning((*stack_pointer)->information != NULL, CALLOC_ERROR);
+
+    *((*stack_pointer)->information)               = {};
+    (*stack_pointer)->information->stack_name      = name;
+    (*stack_pointer)->information->stack_born_line = line;
+    (*stack_pointer)->information->stack_born_file = file;
+
+    stack_ctor(*stack_pointer, capacity, file, line);
 
     return 0;
 }

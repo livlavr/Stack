@@ -29,7 +29,8 @@
     DESCR_(STACK_STRUCT_BAD_RIGHT_CANARY, big_error);     \
     DESCR_(STACK_BAD_LEFT_CANARY, big_error);             \
     DESCR_(STACK_BAD_RIGHT_CANARY, big_error);            \
-    DESCR_(STACK_BAD_HASH, big_error)
+    DESCR_(STACK_BAD_HASH, big_error);                    \
+    DESCR_(STACK_BAD_DATA_HASH, big_error);
 
 #define CANARY_SIZE (int)(sizeof(stack_elem) / sizeof(stack_elem))//DEBUG
 
@@ -60,7 +61,8 @@ enum stack_errors
     STACK_STRUCT_BAD_RIGHT_CANARY = 1 << 8,
     STACK_BAD_LEFT_CANARY         = 1 << 9,
     STACK_BAD_RIGHT_CANARY        = 1 << 10,
-    STACK_BAD_HASH                = 1 << 11
+    STACK_BAD_HASH                = 1 << 11,
+    STACK_BAD_DATA_HASH           = 1 << 12
 };
 
 enum DUMP_AND_CTOR_ERRORS
@@ -72,5 +74,6 @@ int stack_err_error    (int error);
 int stack_ok           (stack* stack_pointer);
 void binary_code_output(int error);
 uint64_t hash          (stack *stack_pointer);
+uint64_t data_hash     (stack_elem* data_with_canaries, int size);
 
 #endif

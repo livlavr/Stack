@@ -24,6 +24,7 @@ struct stack
     stack_elem*  data_with_canaries;//DEBUG
     const char*  dump_file_name;
     stack_elem*  data;
+    uint64_t     data_hash;
     int          size;
     uint64_t     hash;
     int          capacity;

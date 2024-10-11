@@ -19,6 +19,7 @@
 [x] asserts in dumb
 [] make dir dumps if its doesnt exist
 [] TODO-s
+[] HASH for data
 [x] stack null
 [x] dump пиздец
 [x] пофиксить вывод имени стэка в dump
@@ -36,17 +37,20 @@
 [] dump должен учитывать тип stack_elem
 [x] stackOK зануляет параметр stack->error если не обнаружит ошибок
 [x] stack_err_error long int
-[] нормальные канарейки
+[0] нормальные канарейки
 [] asserts doesnt turn down when ndebug mode
 [x] stackok before dump
-[] ull <- int
-[] stack cant become less then user asked
+[0] ull <- int
+[0] stack cant become less then user asked
 [] sanitizer проеб памяти
-   - free stack information
-   - free if check_expression
-   - free в месте окончания программы
-[] глобальная переменная для хранения индексов стэка
-[] double init stack stackerr
+    - free stack information
+    - free if check_expression
+    - free в месте окончания программы
+    - double initialization
+        - Should I allow user do double initialization?
+[] *
+[0] глобальная переменная для хранения индексов стэка
+[0] double init stack stackerr
 [x] check_expression message
 [x] colorful stackok
 [] ndebug
@@ -54,6 +58,6 @@
 [] How could i make dump.txt in certain dir?
 [x] как нормально реализовать stack_dump, чтобы он не стирал
     к хуям собачим файл при инициализации второго стэка с таким же dump_file?
-[] gitsub - check_expression, recalloc
+[] gitsub - check_expression, color_print
 [] How can I defence not stack pointer?
 [] Hash

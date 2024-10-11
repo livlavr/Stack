@@ -5,19 +5,15 @@ typedef int stack_elem;
 
 struct stack;
 
-stack* create_stack_pointer(const char* file, size_t line);
-
-int stack_public_ctor(stack* stack_pointer, int capacity, const char* file,
+int stack_public_ctor(stack** stack_pointer, int capacity, const char* file,
                        size_t line, const char* name);
-int stack_push     (stack* stack_pointer, stack_elem  value, const char* file, size_t line);
-int stack_pop      (stack* stack_pointer, stack_elem* value, const char* file, size_t line);
+int stack_push       (stack* stack_pointer, stack_elem  value, const char* file, size_t line);
+int stack_pop        (stack* stack_pointer, stack_elem* value, const char* file, size_t line);
 int stack_public_dump(stack* stack_pointer, const char* file, size_t line, const char* function);
-int stack_dtor     (stack* stack_pointer, const char* file, size_t line);
-
-#define get_stack_pointer() create_stack_pointer(__FILE__, __LINE__)
+int stack_dtor       (stack* stack_pointer, const char* file, size_t line);
 
 #define stack_init(stack_pointer, capacity)\
-    stack_public_ctor(stack_pointer, capacity, __FILE__, __LINE__, #stack_pointer)
+    stack_public_ctor(&stack_pointer, capacity, __FILE__, __LINE__, #stack_pointer)
 
 #define push(stack_pointer, value)\
     stack_push(stack_pointer, value, __FILE__, __LINE__)

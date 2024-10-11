@@ -48,7 +48,8 @@ static int stack_resize(stack* stack_pointer, int new_size, const char* file, si
         stack_pointer->data_with_canaries[stack_pointer->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
     }
 
-    stack_pointer->hash = hash(stack_pointer);
+    stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
+    stack_pointer->hash      = hash(stack_pointer);
 
     stack_check(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
 
@@ -123,7 +124,8 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
     stack_pointer->initialized = STACK_INITIALIZED;
     stack_pointer->error       = NO_ERRORS;
 
-    stack_pointer->hash = hash(stack_pointer);
+    stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
+    stack_pointer->hash      = hash(stack_pointer);
 
     stack_public_dump(stack_pointer, file, line, __func__);
 
@@ -143,7 +145,8 @@ int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t 
     stack_pointer->data[stack_pointer->size] = value;
     stack_pointer->size++;
 
-    stack_pointer->hash = hash(stack_pointer);
+    stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
+    stack_pointer->hash      = hash(stack_pointer);
 
     stack_public_dump(stack_pointer, file, line, __func__);
 
@@ -171,7 +174,8 @@ int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t 
     stack_pointer->data[stack_pointer->size - 1] = POISON; //DEBUG
     stack_pointer->size--;
 
-    stack_pointer->hash = hash(stack_pointer);
+    stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
+    stack_pointer->hash      = hash(stack_pointer);
 
     stack_public_dump(stack_pointer, file, line, __func__);
 

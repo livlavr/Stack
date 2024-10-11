@@ -33,7 +33,8 @@ int stack_private_dump(stack* stack_pointer)
     fprintf(dumb_file, "initialized = %d\n", stack_pointer->initialized);
     fprintf(dumb_file, "capacity    = %d\n", stack_pointer->capacity);
     fprintf(dumb_file, "size        = %d\n", stack_pointer->size);
-    fprintf(dumb_file, "HASH        = %llu\n", stack_pointer->hash);
+    fprintf(dumb_file, "hash        = %llu\n", stack_pointer->hash);
+    fprintf(dumb_file, "data_hash   = %llu\n", stack_pointer->data_hash);
     fprintf(dumb_file, "error       = %d\n", stack_pointer->error);
 
     fprintf(dumb_file, "CANARY      = %d\n", stack_pointer->left_canary); //DEBUG

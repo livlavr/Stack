@@ -1,0 +1,19 @@
+stack st[0x132e05bd0] at src/main.cpp : 17 : stack_ctor born in src/main.cpp : 17
+initialized = 2
+capacity    = 7
+size        = 0
+hash        = 4394763867271725077
+data_hash   = 5381
+error       = 0
+CANARY      = 808
+[canary][0x132f04480] = 707
+[0][0x132f04484] = 109093 [POISON]
+[1][0x132f04488] = 109093 [POISON]
+[2][0x132f0448c] = 109093 [POISON]
+[3][0x132f04490] = 109093 [POISON]
+[4][0x132f04494] = 109093 [POISON]
+[5][0x132f04498] = 109093 [POISON]
+[6][0x132f0449c] = 109093 [POISON]
+[canary][0x132f044a0] = 707
+CANARY      = 808
+

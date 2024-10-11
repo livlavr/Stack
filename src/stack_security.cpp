@@ -34,18 +34,21 @@ int stack_err_error(int error)
     return error;
 }
 
-int stack_ok(stack* stack_pointer) //TODO valid test //check stack error in the beginning
+int stack_ok(stack* stack_pointer) //TODO valid test
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
     int new_error_code = NO_ERRORS;
 
-    if(stack_pointer->hash != hash(stack_pointer))
+    if(stack_pointer->hash != hash(stack_pointer)) //DEBUG
     {
-        $DEBUG("%llu", stack_pointer->hash);
-        $DEBUG("%llu", hash(stack_pointer));
-        $DEBUG("%llu", hash(stack_pointer));
         new_error_code |= STACK_BAD_HASH;
+    }
+
+    if(stack_pointer->data_hash != data_hash(stack_pointer->data_with_canaries,
+       stack_pointer->capacity + 2 * CANARY_SIZE))//DEBUG
+    {
+        new_error_code |= STACK_BAD_DATA_HASH;
     }
 
     if(stack_pointer->initialized == STACK_DID_NOT_INITIALIZED)
@@ -104,6 +107,24 @@ int stack_ok(stack* stack_pointer) //TODO valid test //check stack error in the 
 
         return stack_err_error(stack_pointer->error);
     }
+}
+
+uint64_t data_hash(stack_elem* data_with_canaries, int size)
+{
+    check_expression(data_with_canaries != NULL, POINTER_IS_NULL);
+
+    uint64_t hash = 5381;
+    int c = 0;
+
+    char* ptr = (char*)data_with_canaries;
+    uint64_t size_of_data = (uint64_t)(size * sizeof(stack_elem));
+    for (int number_of_ptr = 0; number_of_ptr <= size_of_data; number_of_ptr++)
+    {
+        c = *(int*)ptr++;
+        hash = ((hash << 5) + hash) + (uint64_t)c;
+    }
+
+    return hash;
 }
 
 uint64_t hash(stack *stack_pointer)

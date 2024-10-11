@@ -1,0 +1,38 @@
+stack st[0x149605bd0] at src/main.cpp : 17 : stack_ctor born in src/main.cpp : 17
+initialized = 2
+capacity    = 7
+size        = 0
+hash        = 15643318651556436748
+data_hash   = 12093421775243925599
+error       = 0
+CANARY      = 808
+[canary][0x149704480] = 707
+[0][0x149704484] = 109093 [POISON]
+[1][0x149704488] = 109093 [POISON]
+[2][0x14970448c] = 109093 [POISON]
+[3][0x149704490] = 109093 [POISON]
+[4][0x149704494] = 109093 [POISON]
+[5][0x149704498] = 109093 [POISON]
+[6][0x14970449c] = 109093 [POISON]
+[canary][0x1497044a0] = 707
+CANARY      = 808
+
+stack st[0x149605bd0] at src/main.cpp : 21 : stack_push born in src/main.cpp : 17
+initialized = 2
+capacity    = 7
+size        = 1
+hash        = 10389328209882485808
+data_hash   = 16389005880823254544
+error       = 0
+CANARY      = 808
+[canary][0x149704480] = 707
+*[0][0x149704484] = 1
+[1][0x149704488] = 109093 [POISON]
+[2][0x14970448c] = 109093 [POISON]
+[3][0x149704490] = 109093 [POISON]
+[4][0x149704494] = 109093 [POISON]
+[5][0x149704498] = 109093 [POISON]
+[6][0x14970449c] = 109093 [POISON]
+[canary][0x1497044a0] = 707
+CANARY      = 808
+
