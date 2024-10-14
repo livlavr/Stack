@@ -25,7 +25,7 @@
 [x] пофиксить вывод имени стэка в dump
 [x] enum с побитовыми
 [x] раскидать stackok по функциям
-[] say
+[0] say
 [x] renaming
 [x] message
 [x] верификатор проверяет error на ошибку и если что вносит туда новую
@@ -59,7 +59,8 @@
 [x] как нормально реализовать stack_dump, чтобы он не стирал
     к хуям собачим файл при инициализации второго стэка с таким же dump_file?
 [] gitsub - check_expression, color_print
-[] How can I defence not stack pointer?
+[0] How can I defence not stack pointer?
 [] Make colorprintf better
 [] merge fix and main
 [] remove color_printf and check_expression into gitsubmodule
+[] bug fix create error -> stack manipulation -> remove error -> HASH ERROR
