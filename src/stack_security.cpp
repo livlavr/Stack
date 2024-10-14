@@ -117,8 +117,8 @@ uint64_t data_hash(stack_elem* data_with_canaries, int size)
     int c = 0;
 
     char* ptr = (char*)data_with_canaries;
-    uint64_t size_of_data = (uint64_t)(size * sizeof(stack_elem));
-    for (int number_of_ptr = 0; number_of_ptr <= size_of_data; number_of_ptr++)
+    uint64_t size_of_data = (uint64_t)((size_t)size * sizeof(stack_elem));
+    for (uint64_t number_of_ptr = 0; number_of_ptr <= size_of_data; number_of_ptr++)
     {
         c = *(int*)ptr++;
         hash = ((hash << 5) + hash) + (uint64_t)c;

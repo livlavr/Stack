@@ -64,3 +64,5 @@
 [] merge fix and main
 [] remove color_printf and check_expression into gitsubmodule
 [] bug fix create error -> stack manipulation -> remove error -> HASH ERROR
+[] Whats tool to work easer(?) "Проги стали запускаться в 10 раз чаще, код компилится быстрее"
+[] SUBMODULES
