@@ -2,56 +2,83 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <cstring>
+#include <ctime>
 
+<<<<<<< HEAD
 #include "stack_private.h"
 #include "stack_security.h"
 #include "stack.h"
 #include "recalloc.h"
+=======
+#include "../../Custom-asserts/custom_asserts.h"
+#include "stack_security.h"
+#include "stack_public.h"
+>>>>>>> fix
 #include "debug_macros.h"
-#include "check_expression.h"
+#include "stack_consts.h"
+#include "recalloc.h"
+#include "stack.h"
 
+<<<<<<< HEAD
 static const stack_elem POISON              = 109093; //DEBUG?
 
 static int stack_resize(stack* stack, int new_size);
 
 static int stack_resize(stack* stack, int new_size) //TODO DO_NOT_CALL_ME
+=======
+static int stack_resize(stack* stack_pointer, int new_size, const char* file, size_t line)
+>>>>>>> fix
 {
-    check_expression(!stack_ok(stack, __func__), "STACK_RESIZE" && !OK);
+    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    if(stack->capacity < new_size)
+    stack_check(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
+
+    if(stack_pointer->capacity < new_size)
     {
-        stack->data_with_canaries = (stack_elem*)recalloc(stack->data_with_canaries, (size_t)(stack->capacity + 2 * CANARY_SIZE),
+        stack_pointer->data_with_canaries = (stack_elem*)recalloc(stack_pointer->data_with_canaries, (size_t)(stack_pointer->capacity + 2 * CANARY_SIZE),
                        (size_t)(new_size + 2 * CANARY_SIZE), sizeof(stack_elem));//DEBUG
+<<<<<<< HEAD
 
         check_expression(stack->data_with_canaries != NULL, CALLOC_ERROR);
 
         stack->data = stack->data_with_canaries + CANARY_SIZE;//DEBUG CANARY_SIZE
+=======
+>>>>>>> fix
 
-        stack->capacity = new_size;
+        warning(stack_pointer->data_with_canaries != NULL, CALLOC_ERROR);
 
-        for (int number_of_element = stack->size; number_of_element < stack->capacity; number_of_element++)
+        stack_pointer->data = stack_pointer->data_with_canaries + CANARY_SIZE;//DEBUG CANARY_SIZE
+
+        stack_pointer->capacity = new_size;
+
+        for (int number_of_element = stack_pointer->size; number_of_element < stack_pointer->capacity; number_of_element++)
         {
-            stack->data[number_of_element] = POISON;//DEBUG
+            stack_pointer->data[number_of_element] = POISON;//DEBUG
         }
 
-        stack->data_with_canaries[stack->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
+        stack_pointer->data_with_canaries[stack_pointer->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
     }
     else
     {
-        stack->data_with_canaries = (stack_elem*)realloc(stack->data_with_canaries,
+        stack_pointer->data_with_canaries = (stack_elem*)realloc(stack_pointer->data_with_canaries,
                                     (size_t)(new_size + 2 * CANARY_SIZE) * sizeof(stack_elem));//DEBUG +2
-        stack->data = stack->data_with_canaries + CANARY_SIZE;//DEBUG CANARY_SIZE
+        stack_pointer->data = stack_pointer->data_with_canaries + CANARY_SIZE;//DEBUG CANARY_SIZE
 
-        stack->capacity = new_size;
+        stack_pointer->capacity = new_size;
 
-        stack->data_with_canaries[stack->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
+        stack_pointer->data_with_canaries[stack_pointer->capacity + CANARY_SIZE] = STACK_CANARY;//DEBUG
     }
 
-    check_expression(!stack_ok(stack, __func__), "STACK_RESIZE" && !OK);
+    stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
+    stack_pointer->hash      = hash(stack_pointer);
+
+    stack_check(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
 
     return 0;
 }
 
+<<<<<<< HEAD
 int stack_ctor(stack* stack, int capacity)
 {
     // stack_ctor_ok(stack);
@@ -71,67 +98,148 @@ int stack_ctor(stack* stack, int capacity)
     stack->data_with_canaries[CANARY_SIZE + stack->capacity] = STACK_CANARY;//DEBUG
 
     for (int number_of_element = 0; number_of_element < stack->capacity; number_of_element++)
+=======
+static inline void stack_resize_down(stack* stack_pointer, const char* file, size_t line)
+{
+    if (stack_pointer->size * 4 <= stack_pointer->capacity)
     {
-        stack->data[number_of_element] = POISON;
+        stack_resize(stack_pointer, (int)ceil(stack_pointer->capacity / 2), file, line);
     }
-    stack->initialized = STACK_INITIALIZED;
-    stack->error       = NO_ERRORS;
+}
 
-    stack_private_dump(stack, __LINE__, __FILE__, __PRETTY_FUNCTION__);
+static inline void stack_resize_up(stack* stack_pointer, const char* file, size_t line)
+{
+    if(stack_pointer->size == stack_pointer->capacity)
+>>>>>>> fix
+    {
+        stack_resize(stack_pointer, stack_pointer->capacity * 2, file, line);
+    }
+}
 
-    check_expression(!stack_ok(stack, __func__), "STACK_CTOR" && !OK);
+int set_dump_file(stack *stack_pointer)
+{
+    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+
+    char *buffer            = (char *)calloc(SIZE_OF_BUFFER, sizeof(char));
+
+    warning(buffer != NULL, CALLOC_ERROR);
+
+    const time_t timer      = time(NULL);
+    tm *now                 = localtime(&timer);
+    const char *time        = asctime(now);
+    size_t time_char_length = strlen(time) - 1;
+    const char *folder_name = "dumps/";
+
+    strcpy(buffer, folder_name);
+    strncpy(buffer + strlen(folder_name), time, time_char_length);
+    strcat(buffer, ".txt");
+
+    stack_pointer->dump_file_name   = buffer;
 
     return 0;
 }
 
-int stack_push(stack* stack, int value)
+int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line)
 {
-    check_expression(!stack_ok(stack, __func__), "STACK_PUSH" && !OK);
+    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    if(stack->size == stack->capacity)
+    check_expression(capacity > 0, STACK_BAD_CAPACITY);
+
+    set_dump_file(stack_pointer);
+
+    stack_pointer->left_canary  = STRUCT_STACK_CANARY;  //DEBUG
+    stack_pointer->right_canary = STRUCT_STACK_CANARY; //DEBUG
+
+    stack_pointer->size               = 0;
+    stack_pointer->capacity           = capacity;
+    stack_pointer->data_with_canaries = (stack_elem*)calloc((size_t)(capacity + 2 * CANARY_SIZE), sizeof(stack_elem)); //DEBUG CANARY_SIZE
+
+    warning(stack_pointer->data_with_canaries != NULL, CALLOC_ERROR);
+
+    stack_pointer->data               = stack_pointer->data_with_canaries + CANARY_SIZE; //DEBUG
+
+    stack_pointer->data_with_canaries[0]                      = STACK_CANARY;//DEBUG
+    stack_pointer->data_with_canaries[CANARY_SIZE + stack_pointer->capacity] = STACK_CANARY;//DEBUG
+
+    for (int number_of_element = 0; number_of_element < stack_pointer->capacity; number_of_element++)
     {
-        stack_resize(stack, stack->capacity * 2);
+        stack_pointer->data[number_of_element] = POISON;
     }
+    stack_pointer->initialized = STACK_INITIALIZED;
+    stack_pointer->error       = NO_ERRORS;
 
-    stack->data[stack->size] = value;
-    stack->size++;
+    stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
+    stack_pointer->hash      = hash(stack_pointer);
 
-    stack_private_dump(stack, __LINE__, __FILE__, __PRETTY_FUNCTION__);
+    stack_public_dump(stack_pointer, file, line, __func__);
 
-    check_expression(!stack_ok(stack, __func__), "STACK_PUSH" && !OK);
+    stack_check(!stack_ok(stack_pointer), "STACK_CTOR" && !OK, file, line);
 
     return 0;
 }
 
-int stack_pop(stack* stack, stack_elem* value)
+int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t line)
 {
-    check_expression(!stack_ok(stack, __func__), ("STACK_POP" && !OK));
+    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    if (stack->size * 4 <= stack->capacity)
-    {
-        stack_resize(stack, (int)ceil(stack->capacity / 2));
-        //TODO If push and pop recently inited stack capacity will become less then user asked. Is it ok?
-    }
+    stack_check(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
 
-    *value = stack->data[stack->size - 1];
-    stack->data[stack->size - 1] = POISON; //DEBUG
-    stack->size--;
+    stack_resize_up(stack_pointer, file, line);
 
-    stack_private_dump(stack, __LINE__, __FILE__, __PRETTY_FUNCTION__);
+    stack_pointer->data[stack_pointer->size] = value;
+    stack_pointer->size++;
 
-    check_expression(!stack_ok(stack, "stack_pop_end"), ("STACK_POP" && !OK));
+    stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
+    stack_pointer->hash      = hash(stack_pointer);
+
+    stack_public_dump(stack_pointer, file, line, __func__);
+
+    stack_check(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
 
     return 0;
 }
 
-int stack_dtor(stack* stack)
+int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t line)
 {
-    check_expression(!stack_ok(stack, __func__), "STACK_DTOR" && !OK);
+    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
-    stack->size     = 0;
-    stack->capacity = 0;
-    free(stack->data_with_canaries);
-    stack->data = NULL;
+    stack_check(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
+
+    if(stack_pointer->size == 0)
+    {
+        stack_pointer->error += STACK_UNDERFLOW;
+
+        stack_check(!stack_err_error(stack_pointer->error), ("STACK_POP" && !OK), file, line);
+    }
+
+    stack_resize_down(stack_pointer, file, line);
+
+    *value = stack_pointer->data[stack_pointer->size - 1];
+    stack_pointer->data[stack_pointer->size - 1] = POISON; //DEBUG
+    stack_pointer->size--;
+
+    stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
+    stack_pointer->hash      = hash(stack_pointer);
+
+    stack_public_dump(stack_pointer, file, line, __func__);
+
+    stack_check(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
+
+    return 0;
+}
+
+int stack_dtor (stack* stack_pointer, const char* file, size_t line)
+{
+    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+
+    stack_check(!stack_ok(stack_pointer), "STACK_DTOR" && !OK, file, line);
+
+    free(stack_pointer->information);
+    free(stack_pointer->data_with_canaries);
+    stack_pointer->information = NULL;
+    stack_pointer->dump_file_name = NULL;
+    stack_pointer->data_with_canaries = NULL;
+    stack_pointer->data = NULL;
 
     return 0;
 }

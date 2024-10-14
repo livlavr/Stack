@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "stack_private.h"
+#include "stack_public.h"
 #include "stack.h"
 #include "recalloc.h"
 #include "debug_macros.h"
+#include "stack_security.h"
 
 void* recalloc(void* const ptr, size_t old_size, size_t new_size, size_t size_of_type)
 {
@@ -23,8 +24,11 @@ void* recalloc(void* const ptr, size_t old_size, size_t new_size, size_t size_of
         {
             return (void*)new_ptr;
         }
+<<<<<<< HEAD
 
         return (void*)new_ptr;
+=======
+>>>>>>> fix
     }
 
     if(new_size < old_size)
