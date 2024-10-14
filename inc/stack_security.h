@@ -3,12 +3,12 @@
 
 #include "stack_public.h"
 #include "stack_consts.h"
-#include "color_print.h"
+#include "../../Color-printf/color_printf.h"
 
 #define DESCR_(error, big_error) \
     if ((big_error / error & 1) == 1)\
     {\
-        color_print(RED_TEXT, BOLD, #error " ");\
+        color_printf(RED_TEXT, BOLD, #error " ");\
     }\
     else\
     {\
@@ -39,7 +39,7 @@
     int condition_return = condition;                                            \
     if (!(condition_return))                                                        \
     {                                                                        \
-        color_print(YELLOW_TEXT, BOLD, "ERROR %s : %s, file: %s, function: %s, line: %d\n", #condition, \
+        color_printf(YELLOW_TEXT, BOLD, "ERROR %s : %s, file: %s, function: %s, line: %d\n", #condition, \
         #message, file, __FUNCTION__, line);                                   \
         printf("\n");\
         return message;                                                       \

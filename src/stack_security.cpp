@@ -8,8 +8,8 @@
 #include "stack_public.h"
 #include "stack.h"
 #include "debug_macros.h"
-#include "color_print.h"
-#include "check_expression.h"
+#include "../../Color-printf/color_printf.h"
+#include "../../Custom-asserts/custom_asserts.h"
 
 void binary_code_output(int error)
 {
@@ -26,7 +26,7 @@ void binary_code_output(int error)
 
 int stack_err_error(int error)
 {
-    color_print(RED_TEXT, BOLD, "YOUR ERROR CODE: ");
+    color_printf(RED_TEXT, BOLD, "YOUR ERROR CODE: ");
     binary_code_output(error);
     printf("\n");
     DESCRIPTION_OF_ERRORS(error);

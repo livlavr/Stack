@@ -4,7 +4,7 @@
 #include "debug_macros.h"
 #include "stack_consts.h"
 #include "stack_security.h"
-#include "check_expression.h"
+#include "../../Custom-asserts/custom_asserts.h"
 
 int stack_private_dump(stack* stack_pointer)
 {
