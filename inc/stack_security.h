@@ -3,7 +3,7 @@
 
 #include "stack_public.h"
 #include "stack_consts.h"
-#include "../../Color-printf/color_printf.h"
+#include "../Color-printf/color_printf.h"
 
 #define DESCR_(error, big_error) \
     if ((big_error / error & 1) == 1)\

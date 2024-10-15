@@ -8,8 +8,9 @@
 #include "stack_public.h"
 #include "stack.h"
 #include "debug_macros.h"
-#include "../../Color-printf/color_printf.h"
-#include "../../Custom-asserts/custom_asserts.h"
+#include "../Color-printf/color_printf.h"
+#include "../Custom-asserts/custom_asserts.h"
+
 
 void binary_code_output(int error)
 {
