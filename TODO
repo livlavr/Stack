@@ -66,3 +66,4 @@
 [] bug fix create error -> stack manipulation -> remove error -> HASH ERROR
 [] Whats tool to work easer(?) "Проги стали запускаться в 10 раз чаще, код компилится быстрее"
 [] SUBMODULES
+[] .out in build []

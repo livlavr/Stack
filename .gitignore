@@ -31,7 +31,6 @@
 *.out
 *.app
 .*
-TODO
 
 #dSYM
-stack.out.dSUM/
+stack.out.dSUM
