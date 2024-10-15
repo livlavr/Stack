@@ -2,14 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-<<<<<<< HEAD
-#include "stack_private.h"
-#include "ab_test.h"
-#include "recalloc.h"
-#include "stack.h"
-=======
 #include "stack_public.h"
->>>>>>> fix
 #include "debug_macros.h"
 #include "recalloc.h"
 
@@ -19,13 +12,6 @@
 
 int main()
 {
-<<<<<<< HEAD
-    // ab_test();
-    stack* st = create_stack_pointer();
-    STACK_CTOR(st, 10, "dump.txt");
-    st = NULL;
-    stack_push(st, 10);
-=======
     stack* st = NULL;
 
     stack_init(st, 7);
@@ -73,6 +59,5 @@ int main()
 
     stack_destroy(st);
 
->>>>>>> fix
     return 0;
 }

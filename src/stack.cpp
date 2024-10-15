@@ -5,30 +5,15 @@
 #include <cstring>
 #include <ctime>
 
-<<<<<<< HEAD
-#include "stack_private.h"
-#include "stack_security.h"
-#include "stack.h"
-#include "recalloc.h"
-=======
 #include "../../Custom-asserts/custom_asserts.h"
 #include "stack_security.h"
 #include "stack_public.h"
->>>>>>> fix
 #include "debug_macros.h"
 #include "stack_consts.h"
 #include "recalloc.h"
 #include "stack.h"
 
-<<<<<<< HEAD
-static const stack_elem POISON              = 109093; //DEBUG?
-
-static int stack_resize(stack* stack, int new_size);
-
-static int stack_resize(stack* stack, int new_size) //TODO DO_NOT_CALL_ME
-=======
 static int stack_resize(stack* stack_pointer, int new_size, const char* file, size_t line)
->>>>>>> fix
 {
     check_expression(stack_pointer != NULL, POINTER_IS_NULL);
 
@@ -38,13 +23,6 @@ static int stack_resize(stack* stack_pointer, int new_size, const char* file, si
     {
         stack_pointer->data_with_canaries = (stack_elem*)recalloc(stack_pointer->data_with_canaries, (size_t)(stack_pointer->capacity + 2 * CANARY_SIZE),
                        (size_t)(new_size + 2 * CANARY_SIZE), sizeof(stack_elem));//DEBUG
-<<<<<<< HEAD
-
-        check_expression(stack->data_with_canaries != NULL, CALLOC_ERROR);
-
-        stack->data = stack->data_with_canaries + CANARY_SIZE;//DEBUG CANARY_SIZE
-=======
->>>>>>> fix
 
         warning(stack_pointer->data_with_canaries != NULL, CALLOC_ERROR);
 
@@ -78,27 +56,6 @@ static int stack_resize(stack* stack_pointer, int new_size, const char* file, si
     return 0;
 }
 
-<<<<<<< HEAD
-int stack_ctor(stack* stack, int capacity)
-{
-    // stack_ctor_ok(stack);
-
-    stack->left_canary  = STRUCT_STACK_CANARY;  //DEBUG
-    stack->right_canary = STRUCT_STACK_CANARY; //DEBUG
-
-    stack->size               = 0;
-    stack->capacity           = capacity;
-    stack->data_with_canaries = (stack_elem*)calloc((size_t)(capacity + 2 * CANARY_SIZE), sizeof(stack_elem)); //DEBUG CANARY_SIZE
-
-    check_expression(stack->data_with_canaries != NULL, CALLOC_ERROR);
-
-    stack->data               = stack->data_with_canaries + CANARY_SIZE; //DEBUG
-
-    stack->data_with_canaries[0]                      = STACK_CANARY;//DEBUG
-    stack->data_with_canaries[CANARY_SIZE + stack->capacity] = STACK_CANARY;//DEBUG
-
-    for (int number_of_element = 0; number_of_element < stack->capacity; number_of_element++)
-=======
 static inline void stack_resize_down(stack* stack_pointer, const char* file, size_t line)
 {
     if (stack_pointer->size * 4 <= stack_pointer->capacity)
@@ -110,7 +67,6 @@ static inline void stack_resize_down(stack* stack_pointer, const char* file, siz
 static inline void stack_resize_up(stack* stack_pointer, const char* file, size_t line)
 {
     if(stack_pointer->size == stack_pointer->capacity)
->>>>>>> fix
     {
         stack_resize(stack_pointer, stack_pointer->capacity * 2, file, line);
     }

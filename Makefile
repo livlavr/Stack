@@ -1,10 +1,6 @@
 CXX          = gcc-14
 
-<<<<<<< HEAD
-SRC          = main.cpp stack.cpp recalloc.cpp stack_dump.cpp stack_private.cpp ab_test.cpp stack_security.cpp
-=======
 SRC          = main.cpp stack.cpp recalloc.cpp stack_dump.cpp stack_public.cpp stack_security.cpp ../../Color-printf/color_printf.cpp
->>>>>>> fix
 
 BUILD_DIR    = ./build/
 SRC_DIR      = ./src/

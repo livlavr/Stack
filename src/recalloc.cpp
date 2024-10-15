@@ -24,11 +24,6 @@ void* recalloc(void* const ptr, size_t old_size, size_t new_size, size_t size_of
         {
             return (void*)new_ptr;
         }
-<<<<<<< HEAD
-
-        return (void*)new_ptr;
-=======
->>>>>>> fix
     }
 
     if(new_size < old_size)
@@ -51,7 +46,6 @@ void* recalloc(void* const ptr, size_t old_size, size_t new_size, size_t size_of
     {
         return NULL;
     }
-
     memset(new_ptr + (old_size) * size_of_type, 0, (new_size - (old_size + CANARY_SIZE)) * size_of_type);//DEBUG
 
     return (void*)new_ptr;
