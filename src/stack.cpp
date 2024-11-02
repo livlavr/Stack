@@ -31,7 +31,7 @@ static int stack_resize(stack* stack_pointer, int new_size, const char* file, si
 
         stack_pointer->capacity = new_size;
 
-        for (int number_of_element = stack_pointer->size; number_of_element < stack_pointer->capacity; number_of_element++)
+        for(int number_of_element = stack_pointer->size; number_of_element < stack_pointer->capacity; number_of_element++)
         {
             stack_pointer->data[number_of_element] = POISON;//DEBUG
         }
@@ -59,7 +59,7 @@ static int stack_resize(stack* stack_pointer, int new_size, const char* file, si
 
 static inline void stack_resize_down(stack* stack_pointer, const char* file, size_t line)
 {
-    if (stack_pointer->size * 4 <= stack_pointer->capacity)
+    if(stack_pointer->size * 4 <= stack_pointer->capacity)
     {
         stack_resize(stack_pointer, (int)ceil(stack_pointer->capacity / 2), file, line);
     }
@@ -91,7 +91,7 @@ int set_dump_file(stack *stack_pointer)
     strncpy(buffer + strlen(folder_name), time, time_char_length);
     strcat(buffer, ".txt");
 
-    stack_pointer->dump_file_name   = buffer;
+    stack_pointer->dump_file_name = buffer;
 
     return 0;
 }
@@ -118,7 +118,7 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
     stack_pointer->data_with_canaries[0]                      = STACK_CANARY;//DEBUG
     stack_pointer->data_with_canaries[CANARY_SIZE + stack_pointer->capacity] = STACK_CANARY;//DEBUG
 
-    for (int number_of_element = 0; number_of_element < stack_pointer->capacity; number_of_element++)
+    for(int number_of_element = 0; number_of_element < stack_pointer->capacity; number_of_element++)
     {
         stack_pointer->data[number_of_element] = POISON;
     }
@@ -128,7 +128,7 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
     stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
     stack_pointer->hash      = hash(stack_pointer);
 
-    stack_public_dump(stack_pointer, file, line, __func__);
+    // stack_public_dump(stack_pointer, file, line, __func__);
 
     stack_check(!stack_ok(stack_pointer), "STACK_CTOR" && !OK, file, line);
 
@@ -149,7 +149,7 @@ int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t 
     stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
     stack_pointer->hash      = hash(stack_pointer);
 
-    stack_public_dump(stack_pointer, file, line, __func__);
+    // stack_public_dump(stack_pointer, file, line, __func__);
 
     stack_check(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
 
@@ -178,7 +178,7 @@ int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t 
     stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
     stack_pointer->hash      = hash(stack_pointer);
 
-    stack_public_dump(stack_pointer, file, line, __func__);
+    // stack_public_dump(stack_pointer, file, line, __func__);
 
     stack_check(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
 

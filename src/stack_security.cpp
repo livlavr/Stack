@@ -8,7 +8,7 @@
 #include "stack_public.h"
 #include "stack.h"
 #include "debug_macros.h"
-#include "../Color-printf/color_printf.h"
+#include "color_printf.h"
 #include "../Custom-asserts/custom_asserts.h"
 
 
@@ -119,7 +119,7 @@ uint64_t data_hash(stack_elem* data_with_canaries, int size)
 
     char* ptr = (char*)data_with_canaries;
     uint64_t size_of_data = (uint64_t)((size_t)size * sizeof(stack_elem));
-    for (uint64_t number_of_ptr = 0; number_of_ptr <= size_of_data; number_of_ptr++)
+    for(uint64_t number_of_ptr = 0; number_of_ptr <= size_of_data; number_of_ptr++)
     {
         c = *(int*)ptr++;
         hash = ((hash << 5) + hash) + (uint64_t)c;
@@ -141,7 +141,7 @@ uint64_t hash(stack *stack_pointer)
     uint64_t size_of_hash = sizeof(uint64_t);
     uint64_t size_of_int  = sizeof(int);
 
-    while ((uint64_t)ptr <= right_canary_pointer)
+    while((uint64_t)ptr <= right_canary_pointer)
     {
         if((uint64_t)ptr <= hash_pointer - size_of_int || (uint64_t)ptr >= hash_pointer + size_of_hash)
         {

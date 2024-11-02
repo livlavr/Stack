@@ -3,10 +3,10 @@
 
 #include "stack_public.h"
 #include "stack_consts.h"
-#include "../Color-printf/color_printf.h"
+#include "color_printf.h"
 
 #define DESCR_(error, big_error) \
-    if ((big_error / error & 1) == 1)\
+    if((big_error / error & 1) == 1)\
     {\
         color_printf(RED_TEXT, BOLD, #error " ");\
     }\
@@ -37,7 +37,7 @@
 #define stack_check(condition, message, file, line) do                              \
 {                                                                            \
     int condition_return = condition;                                            \
-    if (!(condition_return))                                                        \
+    if(!(condition_return))                                                        \
     {                                                                        \
         color_printf(YELLOW_TEXT, BOLD, "ERROR %s : %s, file: %s, function: %s, line: %d\n", #condition, \
         #message, file, __FUNCTION__, line);                                   \

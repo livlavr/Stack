@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "stack.h"
 #include "debug_macros.h"
@@ -13,9 +14,11 @@ int stack_private_dump(stack* stack_pointer)
 
     // stack_check(!stack_ok(stack_pointer), "STACK_DUMP" && !OK, file, line); //TODO turn on
 
+    system("mkdir -p dumps");
+
     FILE* dumb_file = fopen(stack_pointer->dump_file_name, "a");
 
-    if (dumb_file == NULL)
+    if(dumb_file == NULL)
     {
         printf("CAN'T FIND A \"");
         printf("%s", stack_pointer->dump_file_name);
@@ -46,7 +49,7 @@ int stack_private_dump(stack* stack_pointer)
 
     for(size_t index = 0; index < (size_t)stack_pointer->capacity; index++)
     {
-        if (stack_pointer->data[index] != POISON)
+        if(stack_pointer->data[index] != POISON)
         {
             fprintf(dumb_file, "*[%lu][%p] = %d\n", index,
                     stack_pointer->data + index, stack_pointer->data[index]);

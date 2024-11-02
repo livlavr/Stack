@@ -13,11 +13,11 @@
 [x] ERROR name
 [x] хавать название файла для вывода dump
 [x] stackOK не абортит программу
-[x] repair dump - seg fault if dump not init stack
+[x] repair dump - seg fault ifdump not init stack
 [x] user can input a file output name
 [x] I (dir) - чтобы разделить .h в другую папку
 [x] asserts in dumb
-[0] make dir dumps if its doesnt exist
+[0] make dir dumps ifits doesnt exist
 [] TODO-s
 [x] HASH for data
 [x] stack null
@@ -44,7 +44,7 @@
 [0] stack cant become less then user asked
 [] sanitizer проеб памяти
     - free stack information
-    - free if check_expression
+    - free ifcheck_expression
     - free в месте окончания программы
     - double initialization
         - Should I allow user do double initialization?
