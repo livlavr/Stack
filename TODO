@@ -13,11 +13,11 @@
 [x] ERROR name
 [x] хавать название файла для вывода dump
 [x] stackOK не абортит программу
-[x] repair dump - seg fault ifdump not init stack
+[x] repair dump - seg fault if dump not init stack
 [x] user can input a file output name
 [x] I (dir) - чтобы разделить .h в другую папку
 [x] asserts in dumb
-[0] make dir dumps ifits doesnt exist
+[0] make dir dumps if its doesnt exist
 [] TODO-s
 [x] HASH for data
 [x] stack null
@@ -37,14 +37,13 @@
 [] dump должен учитывать тип stack_elem
 [x] stackOK зануляет параметр stack->error если не обнаружит ошибок
 [x] stack_err_error long int
-[0] нормальные канарейки
-[] asserts doesnt turn down when ndebug mode
+[x] asserts doesnt turn down when ndebug mode
 [x] stackok before dump
 [0] ull <- int
 [0] stack cant become less then user asked
 [] sanitizer проеб памяти
     - free stack information
-    - free ifcheck_expression
+    - free if check_expression
     - free в месте окончания программы
     - double initialization
         - Should I allow user do double initialization?
@@ -53,17 +52,15 @@
 [0] double init stack stackerr
 [x] check_expression message
 [x] colorful stackok
-[] ndebug
-[] прописать vscode, build и мб еще что-то в gitignore
 [x] How could i make dump.txt in certain dir?
 [x] как нормально реализовать stack_dump, чтобы он не стирал
     к хуям собачим файл при инициализации второго стэка с таким же dump_file?
-[] gitsub - check_expression, color_print
 [0] How can I defence not stack pointer?
-[] Make colorprintf better
-[] merge fix and main
-[] remove color_printf and check_expression into gitsubmodule
-[] bug fix create error -> stack manipulation -> remove error -> HASH ERROR
+[x] Make colorprintf better
+[x] merge fix and main
+[x] move color_printf and check_expression into gitsubmodule
+[] bug fix: create error -> stack manipulation -> remove error -> HASH ERROR
 [] Whats tool to work easer(?) "Проги стали запускаться в 10 раз чаще, код компилится быстрее"
 [] SUBMODULES
+[] Add debug macros submodule
 [] .out in build []
