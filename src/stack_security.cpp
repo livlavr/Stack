@@ -37,7 +37,7 @@ int stack_err_error(int error)
 
 int stack_ok(stack* stack_pointer) //TODO valid test
 {
-    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+    check_expression(stack_pointer, POINTER_IS_NULL);
 
     int new_error_code = NO_ERRORS;
 
@@ -112,7 +112,7 @@ int stack_ok(stack* stack_pointer) //TODO valid test
 
 uint64_t data_hash(stack_elem* data_with_canaries, int size)
 {
-    check_expression(data_with_canaries != NULL, POINTER_IS_NULL);
+    check_expression(data_with_canaries, POINTER_IS_NULL);
 
     uint64_t hash = 5381;
     int c = 0;
@@ -130,7 +130,7 @@ uint64_t data_hash(stack_elem* data_with_canaries, int size)
 
 uint64_t hash(stack *stack_pointer)
 {
-    check_expression(stack_pointer != NULL, STACK_POINTER_IS_NULL);
+    check_expression(stack_pointer, STACK_POINTER_IS_NULL);
 
     uint64_t hash = 5381;
     int c = 0;

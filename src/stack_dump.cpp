@@ -10,7 +10,7 @@
 
 int stack_private_dump(stack* stack_pointer)
 {
-    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+    check_expression(stack_pointer, POINTER_IS_NULL);
 
     // stack_check(!stack_ok(stack_pointer), "STACK_DUMP" && !OK, file, line); //TODO turn on
 

@@ -41,12 +41,12 @@ int stack_manipulations_example()
 
 char* scan_text(const char* filename, char* text)
 {
-    check_expression(filename != NULL, POINTER_IS_NULL);
+    check_expression(filename, POINTER_IS_NULL);
 
     FILE* file      = fopen(filename, "r");
     struct stat buf = {};
 
-    check_expression(file != NULL, FILE_OPEN_ERROR);
+    check_expression(file, FILE_OPEN_ERROR);
 
     int stat_value_check = stat(filename, &buf);
 
@@ -55,7 +55,7 @@ char* scan_text(const char* filename, char* text)
     size_t size_of_text = (size_t)buf.st_size + 1;
     text                = (char*)calloc(size_of_text, sizeof(char));
 
-    check_expression(text != NULL, CALLOC_ERROR);
+    check_expression(text, CALLOC_ERROR);
 
     size_t fread_value_check = fread(text, sizeof(char), size_of_text, file);
 

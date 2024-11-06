@@ -16,7 +16,7 @@
 
 static int stack_resize(stack* stack_pointer, int new_size, const char* file, size_t line)
 {
-    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+    check_expression(stack_pointer, POINTER_IS_NULL);
 
     stack_check(!stack_ok(stack_pointer), "STACK_RESIZE" && !OK, file, line);
 
@@ -25,7 +25,7 @@ static int stack_resize(stack* stack_pointer, int new_size, const char* file, si
         stack_pointer->data_with_canaries = (stack_elem*)recalloc(stack_pointer->data_with_canaries, (size_t)(stack_pointer->capacity + 2 * CANARY_SIZE),
                        (size_t)(new_size + 2 * CANARY_SIZE), sizeof(stack_elem));//DEBUG
 
-        warning(stack_pointer->data_with_canaries != NULL, CALLOC_ERROR);
+        warning(stack_pointer->data_with_canaries, CALLOC_ERROR);
 
         stack_pointer->data = stack_pointer->data_with_canaries + CANARY_SIZE;//DEBUG CANARY_SIZE
 
@@ -75,11 +75,11 @@ static inline void stack_resize_up(stack* stack_pointer, const char* file, size_
 
 int set_dump_file(stack *stack_pointer)
 {
-    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+    check_expression(stack_pointer, POINTER_IS_NULL);
 
     char *buffer            = (char *)calloc(SIZE_OF_BUFFER, sizeof(char));
 
-    warning(buffer != NULL, CALLOC_ERROR);
+    warning(buffer, CALLOC_ERROR);
 
     const time_t timer      = time(NULL);
     tm *now                 = localtime(&timer);
@@ -98,7 +98,7 @@ int set_dump_file(stack *stack_pointer)
 
 int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line)
 {
-    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+    check_expression(stack_pointer, POINTER_IS_NULL);
 
     check_expression(capacity > 0, STACK_BAD_CAPACITY);
 
@@ -111,7 +111,7 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
     stack_pointer->capacity           = capacity;
     stack_pointer->data_with_canaries = (stack_elem*)calloc((size_t)(capacity + 2 * CANARY_SIZE), sizeof(stack_elem)); //DEBUG CANARY_SIZE
 
-    warning(stack_pointer->data_with_canaries != NULL, CALLOC_ERROR);
+    warning(stack_pointer->data_with_canaries, CALLOC_ERROR);
 
     stack_pointer->data               = stack_pointer->data_with_canaries + CANARY_SIZE; //DEBUG
 
@@ -137,7 +137,7 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
 
 int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t line)
 {
-    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+    check_expression(stack_pointer, POINTER_IS_NULL);
 
     stack_check(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
 
@@ -158,7 +158,7 @@ int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t 
 
 int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t line)
 {
-    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+    check_expression(stack_pointer, POINTER_IS_NULL);
 
     stack_check(!stack_ok(stack_pointer), ("STACK_POP" && !OK), file, line);
 
@@ -187,7 +187,7 @@ int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t 
 
 int stack_dtor (stack* stack_pointer, const char* file, size_t line)
 {
-    check_expression(stack_pointer != NULL, POINTER_IS_NULL);
+    check_expression(stack_pointer, POINTER_IS_NULL);
 
     stack_check(!stack_ok(stack_pointer), "STACK_DTOR" && !OK, file, line);
 
