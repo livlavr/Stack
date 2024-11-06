@@ -17,7 +17,7 @@
 [x] user can input a file output name
 [x] I (dir) - чтобы разделить .h в другую папку
 [x] asserts in dumb
-[0] make dir dumps if its doesnt exist
+[x] make dir dumps if its doesnt exist
 [] TODO-s
 [x] HASH for data
 [x] stack null
@@ -25,7 +25,6 @@
 [x] пофиксить вывод имени стэка в dump
 [x] enum с побитовыми
 [x] раскидать stackok по функциям
-[0] say
 [x] renaming
 [x] message
 [x] верификатор проверяет error на ошибку и если что вносит туда новую

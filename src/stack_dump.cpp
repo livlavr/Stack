@@ -12,7 +12,7 @@ int stack_private_dump(stack* stack_pointer)
 {
     check_expression(stack_pointer, POINTER_IS_NULL);
 
-    // stack_check(!stack_ok(stack_pointer), "STACK_DUMP" && !OK, file, line); //TODO turn on
+    stack_check(!stack_ok(stack_pointer), "STACK_DUMP" && !OK, file, line);
 
     system("mkdir -p Stack-dumps");
 
