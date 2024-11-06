@@ -63,3 +63,4 @@
 [] SUBMODULES
 [] Add debug macros submodule
 [] .out in build []
+[] move setdumpfile from stack.cpp to stackdump.cpp
