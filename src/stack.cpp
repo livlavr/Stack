@@ -85,7 +85,7 @@ int set_dump_file(stack *stack_pointer)
     tm *now                 = localtime(&timer);
     const char *time        = asctime(now);
     size_t time_char_length = strlen(time) - 1;
-    const char *folder_name = "dumps/";
+    const char *folder_name = "Stack-dumps/";
 
     strcpy(buffer, folder_name);
     strncpy(buffer + strlen(folder_name), time, time_char_length);

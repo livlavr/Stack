@@ -14,7 +14,7 @@ int stack_private_dump(stack* stack_pointer)
 
     // stack_check(!stack_ok(stack_pointer), "STACK_DUMP" && !OK, file, line); //TODO turn on
 
-    system("mkdir -p dumps");
+    system("mkdir -p Stack-dumps");
 
     FILE* dumb_file = fopen(stack_pointer->dump_file_name, "a");
 

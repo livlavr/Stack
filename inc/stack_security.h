@@ -70,10 +70,10 @@ enum DUMP_AND_CTOR_ERRORS
     FILE_OPENING_ERROR = 100
 };
 
-int stack_err_error    (int error);
-int stack_ok           (stack* stack_pointer);
-void binary_code_output(int error);
-uint64_t hash          (stack *stack_pointer);
-uint64_t data_hash     (stack_elem* data_with_canaries, int size);
+int      stack_err_error    (int error);
+int      stack_ok           (stack* stack_pointer);
+void     binary_code_output (int error);
+uint64_t hash               (stack *stack_pointer);
+uint64_t data_hash          (stack_elem* data_with_canaries, int size);
 
 #endif
