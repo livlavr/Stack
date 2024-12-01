@@ -27,7 +27,7 @@ void binary_code_output(int error)
 
 int stack_err_error(int error)
 {
-    color_printf(RED_TEXT, BOLD, "YOUR ERROR CODE: ");
+    color_printf(RED_COLOR, BOLD, "YOUR ERROR CODE: ");
     binary_code_output(error);
     printf("\n");
     DESCRIPTION_OF_ERRORS(error);

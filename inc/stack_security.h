@@ -8,7 +8,7 @@
 #define DESCR_(error, big_error) \
     if((big_error / error & 1) == 1)\
     {\
-        color_printf(RED_TEXT, BOLD, #error " ");\
+        color_printf(RED_COLOR, BOLD, #error " ");\
     }\
     else\
     {\
@@ -39,7 +39,7 @@
     int condition_return = condition;                                            \
     if(!(condition_return))                                                        \
     {                                                                        \
-        color_printf(YELLOW_TEXT, BOLD, "ERROR %s : %s, file: %s, function: %s, line: %d\n", #condition, \
+        color_printf(YELLOW_COLOR, BOLD, "ERROR %s : %s, file: %s, function: %s, line: %d\n", #condition, \
         #message, file, __FUNCTION__, line);                                   \
         printf("\n");\
         return message;                                                       \

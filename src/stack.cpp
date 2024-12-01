@@ -185,9 +185,19 @@ int stack_pop(stack* stack_pointer, stack_elem* value, const char* file, size_t 
     return 0;
 }
 
+int stack_empty (stack* stack_pointer, const char* file, size_t line)
+{
+    check_expression(file, POINTER_IS_NULL);
+    stack_check(!stack_ok(stack_pointer), "STACK_EMPTY" && !OK, file, line);
+
+    return (stack_pointer->size == 0);
+
+}
+
 int stack_dtor (stack* stack_pointer, const char* file, size_t line)
 {
     check_expression(stack_pointer, POINTER_IS_NULL);
+    check_expression(file,          POINTER_IS_NULL);
 
     stack_check(!stack_ok(stack_pointer), "STACK_DTOR" && !OK, file, line);
 

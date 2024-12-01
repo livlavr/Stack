@@ -10,6 +10,7 @@ int stack_public_ctor(stack** stack_pointer, int capacity, const char* file,
 int stack_push       (stack* stack_pointer, stack_elem  value, const char* file, size_t line);
 int stack_pop        (stack* stack_pointer, stack_elem* value, const char* file, size_t line);
 int stack_public_dump(stack* stack_pointer, const char* file, size_t line, const char* function);
+int stack_empty      (stack* stack_pointer, const char* file, size_t line);
 int stack_dtor       (stack* stack_pointer, const char* file, size_t line);
 
 #define stack_init(stack_pointer, capacity)\
@@ -20,6 +21,9 @@ int stack_dtor       (stack* stack_pointer, const char* file, size_t line);
 
 #define pop(stack_pointer, value)\
     stack_pop(stack_pointer, value, __FILE__, __LINE__)
+
+#define empty(stack_pointer)\
+    stack_empty(stack_pointer, __FILE__, __LINE__)
 
 #define stack_destroy(stack_pointer)\
     stack_dtor(stack_pointer, __FILE__, __LINE__)
