@@ -10,8 +10,8 @@ TARGET       = stack.out
 OBJECT       = $(patsubst %.cpp, %.o, $(SRC))
 BUILD_OBJ    = $(addprefix $(BUILD_DIR), $(OBJECT))
 
-GREEN_TEXT   = \033[1;32m
-YELLOW_TEXT  = \033[1;33m
+GREEN_COLOR   = \033[1;32m
+YELLOW_COLOR  = \033[1;33m
 DEFAULT_TEXT = \033[0m
 
 DED_FLAGS    = -D _DEBUG -ggdb2 -std=c++17 -O0 -Wall -Wextra -Weffc++                                     \
@@ -38,7 +38,7 @@ all   : $(TARGET)
 
 $(TARGET) :  $(BUILD_DIR) $(OBJECT)
 	$(CXX)   $(BUILD_OBJ) -o $(TARGET) -D _NDEBUG
-	@printf "$(GREEN_TEXT)$(TARGET) COMPILED$(DEFAULT_TEXT)\n"
+	@printf "$(GREEN_COLOR)$(TARGET) COMPILED$(DEFAULT_TEXT)\n"
 
 $(BUILD_DIR) :
 	mkdir -p build
@@ -48,7 +48,7 @@ $(OBJECT) : %.o : %.cpp
 
 ded : $(addprefix $(SRC_DIR), $(SRC))
 	$(CXX) $(CFLAGS) $^ -o $(TARGET) $(DED_FLAGS)
-	@printf "$(YELLOW_TEXT)SKOLKO MOJNO BOJE MOY BLYAT'$(DEFAULT_TEXT)\n"
+	@printf "$(YELLOW_COLOR)SKOLKO MOJNO BOJE MOY BLYAT'$(DEFAULT_TEXT)\n"
 
 flash:
 	clear
@@ -61,4 +61,4 @@ doxy :
 
 clean :
 	@rm -f -r $(addprefix $(BUILD_DIR), *.o) $(TARGET) *.dSYM dump.txt
-	@printf  "$(YELLOW_TEXT)$(TARGET) CLEANED$(DEFAULT_TEXT)\n"
+	@printf  "$(YELLOW_COLOR)$(TARGET) CLEANED$(DEFAULT_TEXT)\n"

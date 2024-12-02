@@ -99,13 +99,12 @@ int set_dump_file(stack *stack_pointer)
 int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line)
 {
     check_expression(stack_pointer, POINTER_IS_NULL);
-
-    check_expression(capacity > 0, STACK_BAD_CAPACITY);
+    check_expression(capacity > 0,  STACK_BAD_CAPACITY);
 
     set_dump_file(stack_pointer);
 
-    stack_pointer->left_canary  = STRUCT_STACK_CANARY;  //DEBUG
-    stack_pointer->right_canary = STRUCT_STACK_CANARY; //DEBUG
+    stack_pointer->left_canary        = STRUCT_STACK_CANARY;  //DEBUG
+    stack_pointer->right_canary       = STRUCT_STACK_CANARY;  //DEBUG
 
     stack_pointer->size               = 0;
     stack_pointer->capacity           = capacity;
@@ -113,9 +112,9 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
 
     warning(stack_pointer->data_with_canaries, CALLOC_ERROR);
 
-    stack_pointer->data               = stack_pointer->data_with_canaries + CANARY_SIZE; //DEBUG
+    stack_pointer->data = stack_pointer->data_with_canaries + CANARY_SIZE; //DEBUG
 
-    stack_pointer->data_with_canaries[0]                      = STACK_CANARY;//DEBUG
+    stack_pointer->data_with_canaries[0] = STACK_CANARY;//DEBUG
     stack_pointer->data_with_canaries[CANARY_SIZE + stack_pointer->capacity] = STACK_CANARY;//DEBUG
 
     for(int number_of_element = 0; number_of_element < stack_pointer->capacity; number_of_element++)
@@ -125,8 +124,8 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
     stack_pointer->initialized = STACK_INITIALIZED;
     stack_pointer->error       = NO_ERRORS;
 
-    stack_pointer->data_hash = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
-    stack_pointer->hash      = hash(stack_pointer);
+    stack_pointer->data_hash   = data_hash(stack_pointer->data_with_canaries, stack_pointer->capacity + 2 * CANARY_SIZE);
+    stack_pointer->hash        = hash(stack_pointer);
 
     // stack_public_dump(stack_pointer, file, line, __func__);
 
@@ -138,8 +137,6 @@ int stack_ctor(stack* stack_pointer, int capacity, const char* file, size_t line
 int stack_push(stack* stack_pointer, stack_elem value, const char* file, size_t line)
 {
     check_expression(stack_pointer, POINTER_IS_NULL);
-
-    stack_check(!stack_ok(stack_pointer), "STACK_PUSH" && !OK, file, line);
 
     stack_resize_up(stack_pointer, file, line);
 
@@ -191,7 +188,6 @@ int stack_empty (stack* stack_pointer, const char* file, size_t line)
     stack_check(!stack_ok(stack_pointer), "STACK_EMPTY" && !OK, file, line);
 
     return (stack_pointer->size == 0);
-
 }
 
 int stack_dtor (stack* stack_pointer, const char* file, size_t line)
