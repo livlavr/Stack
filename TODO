@@ -43,7 +43,7 @@
 [0] * - codestyle
 [0] глобальная переменная для хранения индексов стэка
 [0] double init stack stackerr
-[x] check_expression message
+[x] warning message
 [x] colorful stackok
 [x] How could i make dump.txt in certain dir?
 [x] как нормально реализовать stack_dump, чтобы он не стирал
@@ -51,7 +51,7 @@
 [0] How can I defence not stack pointer?
 [x] Make colorprintf better
 [x] merge fix and main
-[x] move color_printf and check_expression into gitsubmodule
+[x] move color_printf and warning into gitsubmodule
 [] bug fix: create error -> stack manipulation -> remove error -> HASH ERROR
 [] Whats tool to work easer(?) "Проги стали запускаться в 10 раз чаще, код компилится быстрее"
 [] SUBMODULES

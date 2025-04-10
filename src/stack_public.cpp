@@ -10,18 +10,18 @@
 int stack_public_ctor(stack** stack_pointer, int capacity, const char* file,
                        size_t line, const char* name)
 {
-    check_expression(capacity > 0, STACK_BAD_CAPACITY);
+    warning(capacity > 0, STACK_BAD_CAPACITY);
 
     *stack_pointer = (stack*)calloc(1, sizeof(stack));
 
-    warning(stack_pointer, CALLOC_ERROR);
+    customAssert(stack_pointer, CALLOC_ERROR);
 
     (*stack_pointer)->error       = NO_ERRORS;
     (*stack_pointer)->initialized = STACK_DID_NOT_INITIALIZED;
 
     (*stack_pointer)->information = (stack_info*)calloc(1, sizeof(stack_info));
 
-    warning((*stack_pointer)->information, CALLOC_ERROR);
+    customAssert((*stack_pointer)->information, CALLOC_ERROR);
 
     *((*stack_pointer)->information)               = {};
     (*stack_pointer)->information->stack_name      = name;
@@ -37,7 +37,7 @@ int stack_public_dump(stack* stack_pointer, const char* file, size_t line, const
 {
     return 0;   //return bacause of release version - //TODO make debug() wrap for dumps and canaries
 
-    check_expression(stack_pointer, POINTER_IS_NULL);
+    warning(stack_pointer, POINTER_IS_NULL);
 
     // stack_check(!stack_ok(stack_pointer), "STACK_DUMP" && !OK, file, line); - //BUG Vulnerability intentionally left for the task
 

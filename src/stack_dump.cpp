@@ -12,7 +12,7 @@ int stack_private_dump(stack* stack_pointer)
 {
     return 0;   //return bacause of release version - //TODO make debug() wrap for dumps and canaries
 
-    check_expression(stack_pointer, POINTER_IS_NULL);
+    warning(stack_pointer, POINTER_IS_NULL);
 
     system("mkdir -p Stack-dumps");
 
