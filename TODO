@@ -40,12 +40,6 @@
 [x] stackok before dump
 [0] ull <- int
 [0] stack cant become less then user asked
-[] sanitizer проеб памяти
-    - free stack information
-    - free if check_expression
-    - free в месте окончания программы
-    - double initialization
-        - Should I allow user do double initialization?
 [0] * - codestyle
 [0] глобальная переменная для хранения индексов стэка
 [0] double init stack stackerr

@@ -5,45 +5,45 @@
 #include "stack_consts.h"
 #include "color_printf.h"
 
-#define DESCR_(error, big_error) \
-    if((big_error / error & 1) == 1)\
-    {\
-        color_printf(RED_COLOR, BOLD, #error " ");\
-    }\
-    else\
-    {\
-        printf("%s ", #error);\
-    }\
-    binary_code_output(error);\
-    printf("\n")\
+#define DESCR_(error, big_error)                      \
+    if((big_error / error & 1) == 1)                  \
+    {                                                 \
+        color_printf(RED_COLOR, BOLD, #error " ");    \
+    }                                                 \
+    else                                              \
+    {                                                 \
+        printf("%s ", #error);                        \
+    }                                                 \
+    binary_code_output(error);                        \
+    printf("\n")                                      \
 
-#define DESCRIPTION_OF_ERRORS(big_error)                  \
-    DESCR_(STACK_DID_NOT_INITIALIZED, big_error);         \
-    DESCR_(STACK_DOUBLE_INITIALIZING, big_error);         \
-    DESCR_(STACK_POINTER_IS_NULL, big_error);             \
-    DESCR_(STACK_OVERFLOW, big_error);                    \
-    DESCR_(STACK_UNDERFLOW, big_error);                   \
-    DESCR_(STACK_BAD_CAPACITY, big_error);                \
-    DESCR_(STACK_BAD_SIZE, big_error);                    \
-    DESCR_(STACK_STRUCT_BAD_LEFT_CANARY, big_error);      \
-    DESCR_(STACK_STRUCT_BAD_RIGHT_CANARY, big_error);     \
-    DESCR_(STACK_BAD_LEFT_CANARY, big_error);             \
-    DESCR_(STACK_BAD_RIGHT_CANARY, big_error);            \
-    DESCR_(STACK_BAD_HASH, big_error);                    \
+#define DESCRIPTION_OF_ERRORS(big_error)              \
+    DESCR_(STACK_DID_NOT_INITIALIZED, big_error);     \
+    DESCR_(STACK_DOUBLE_INITIALIZING, big_error);     \
+    DESCR_(STACK_POINTER_IS_NULL, big_error);         \
+    DESCR_(STACK_OVERFLOW, big_error);                \
+    DESCR_(STACK_UNDERFLOW, big_error);               \
+    DESCR_(STACK_BAD_CAPACITY, big_error);            \
+    DESCR_(STACK_BAD_SIZE, big_error);                \
+    DESCR_(STACK_STRUCT_BAD_LEFT_CANARY, big_error);  \
+    DESCR_(STACK_STRUCT_BAD_RIGHT_CANARY, big_error); \
+    DESCR_(STACK_BAD_LEFT_CANARY, big_error);         \
+    DESCR_(STACK_BAD_RIGHT_CANARY, big_error);        \
+    DESCR_(STACK_BAD_HASH, big_error);                \
     DESCR_(STACK_BAD_DATA_HASH, big_error);
 
 #define CANARY_SIZE (int)(sizeof(stack_elem) / sizeof(stack_elem))//DEBUG
 
-#define stack_check(condition, message, file, line) do                              \
-{                                                                            \
-    int condition_return = condition;                                            \
-    if(!(condition_return))                                                        \
-    {                                                                        \
+#define stack_check(condition, message, file, line) do                                                    \
+{                                                                                                         \
+    int condition_return = condition;                                                                     \
+    if(!(condition_return))                                                                               \
+    {                                                                                                     \
         color_printf(YELLOW_COLOR, BOLD, "ERROR %s : %s, file: %s, function: %s, line: %d\n", #condition, \
-        #message, file, __FUNCTION__, line);                                   \
-        printf("\n");\
-        return message;                                                       \
-    }                                                                        \
+        #message, file, __FUNCTION__, line);                                                              \
+        printf("\n");                                                                                     \
+        return message;                                                                                   \
+    }                                                                                                     \
 } while(0)
 
 enum stack_errors

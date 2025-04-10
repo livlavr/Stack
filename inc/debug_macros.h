@@ -8,10 +8,10 @@
     #define DEFAULT "\033[0m"
     #define BLUE    "\033[36m"
 
-    #define $DEBUG(type_of_output, variable) do                                     \
-    {                                                                               \
-        printf("< " type_of_output " > - %s | "                                    \
-               BLUE   "file - %s | "                                              \
+    #define $DEBUG(type_of_output, variable) do                                \
+    {                                                                          \
+        printf("< " type_of_output " > - %s | "                                \
+               BLUE   "file - %s | "                                           \
                YELLOW "line - %d | "                                           \
                GREEN  "function - %s\n"                                        \
                DEFAULT, variable, #variable, __FILE__, __LINE__, __FUNCTION__);\
