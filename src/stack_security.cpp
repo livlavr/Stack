@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 
+#include "error_types.h"
 #include "stack_security.h"
 #include "stack_consts.h"
 #include "stack_public.h"
@@ -139,7 +140,7 @@ uint64_t hash(stack *stack_pointer)
     uint64_t right_canary_pointer = (uint64_t)&stack_pointer->right_canary;
     uint64_t hash_pointer = (uint64_t)&stack_pointer->hash;
     uint64_t size_of_hash = sizeof(uint64_t);
-    uint64_t size_of_int  = sizeof(int);
+    int      size_of_int  = sizeof(int);
 
     while((uint64_t)ptr <= right_canary_pointer)
     {

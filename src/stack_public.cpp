@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "error_types.h"
 #include "stack_public.h"
 #include "stack.h"
 #include "../Custom-asserts/custom_asserts.h"

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "error_types.h"
 #include "stack_public.h"
 #include "stack.h"
 #include "recalloc.h"

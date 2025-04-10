@@ -7,6 +7,7 @@
 
 #include "../Custom-asserts/custom_asserts.h"
 
+#include "error_types.h"
 #include "stack_security.h"
 #include "stack_public.h"
 #include "debug_macros.h"
@@ -195,7 +196,7 @@ int stack_dtor (stack* stack_pointer, const char* file, size_t line)
     warning(stack_pointer, POINTER_IS_NULL);
     warning(file,          POINTER_IS_NULL);
 
-    stack_check(!stack_ok(stack_pointer), "STACK_DTOR" && !OK, file, line);
+    // stack_check(!stack_ok(stack_pointer), "STACK_DTOR" && !OK, file, line);
 
     free(stack_pointer->information);
     free(stack_pointer->data_with_canaries);

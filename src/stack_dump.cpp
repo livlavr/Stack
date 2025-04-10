@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "error_types.h"
 #include "stack.h"
 #include "debug_macros.h"
 #include "stack_consts.h"
